@@ -5,8 +5,10 @@ const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storea: "sample.db",
+  storage: "ps_FW_TW.db",
 });
+
+export {sequelize};
 
 const User = sequelize.define("user", {
   username: {
