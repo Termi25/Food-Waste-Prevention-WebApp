@@ -5,13 +5,12 @@ function User (props) {
 
   return (
     <div className='regular-user'>
-      <div className='username'>
-        {item.username}
+      <div className='email'>
+        {item.email}
       </div>
-      <div className='fullName'>
-        {item.fullName}
+      <div className='password'>
+        {item.password}
       </div>
-      Regular user
     </div>
   )
 }

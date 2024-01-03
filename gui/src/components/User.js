@@ -8,11 +8,7 @@ function User(props) {
   //pass data to RegularUser/PowerUser component through props (named "item" in this case)
   return (
     <div className="user">
-      {item.type === "regular-user" ? (
-        <RegularUser item={item} />
-      ) : (
-        <PowerUser item={item} />
-      )}
+      <RegularUser item={item} />
     </div>
   );
 }

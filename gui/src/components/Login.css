@@ -1,0 +1,14 @@
+#mainLogin{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:300px;
+    width:300px;
+    background-color: #1A4D2E;
+    border-radius: 15%;
+    filter: drop-shadow(5px 5px 0px #FF9F29);
+}
+
+label{
+    color:#FAF3E3;
+}

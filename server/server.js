@@ -176,6 +176,27 @@ app.get("/users", async (req, res, next) => {
   }
 });
 
+//AUTH request -functional
+app.post("/auth",async (req,res,next)=>{
+  try{
+    const {email,password}=req.body;
+
+    const users=await User.findAll({ where: { emailAdress:email}})
+    if(users.length===1){
+      const user=users.shift()
+      if(password===user.password){
+        console.log("Succesful auth");
+        return res.status(201).json(user);
+      }else{
+        console.log("Failed auth");
+        return res.status(401).json({message:"Invalid password"});
+      }
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
 
 // INSERT user INTO users -functional
 app.post("/users", async (req, res, next) => {
