@@ -176,6 +176,22 @@ app.get("/users", async (req, res, next) => {
   }
 });
 
+//SELECT user From users by id -functional
+app.get("/users/:id_user",async (req,res,next)=>{
+  try{
+    const id=req.params.id_user;
+    const users=await User.findAll({ where: { id_user:id}})
+    if(users.length===1){
+      const user=users.shift()
+      return res.status(201).json(user);
+    }else{
+      return res.status(401).json({message:"Invalid user identifier"});
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
 //AUTH request -functional
 app.post("/auth",async (req,res,next)=>{
   try{
