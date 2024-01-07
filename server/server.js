@@ -202,17 +202,16 @@ app.post("/auth",async (req,res,next)=>{
       const user=users.shift()
       if(password===user.password){
         console.log("Succesful auth");
-        return res.status(201).json(user);
+        res.status(201).json(user);
       }else{
         console.log("Failed auth");
-        return res.status(401).json({message:"Invalid password"});
+        res.status(401).json({message:"Invalid password"});
       }
     }
   }catch(err){
     next(err);
   }
 });
-
 
 // INSERT user INTO users -functional
 app.post("/users", async (req, res, next) => {
@@ -263,7 +262,7 @@ app.put('/users/:id_user',async(req,res,next)=>{
 //Food Routers
 
 // SELECT all food owned by user -functional
-app.get("/:id_user/foods", async(req,res,next)=>{
+app.get("/foods/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
@@ -299,7 +298,7 @@ app.post("/:id_user/foods",async(req,res,next)=>{
 });
 
 // UPDATE food -functional
-app.put('/:id_user/foods/:id_food',async(req,res,next)=>{
+app.put('/foods/:id_user/:id_food',async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user)
@@ -320,7 +319,7 @@ app.put('/:id_user/foods/:id_food',async(req,res,next)=>{
 });
 
 // DELETE food with certain user -functional
-app.delete('/:id_user/foods/:id_food', async(req,res,next)=>{
+app.delete('foods/:id_user/:id_food', async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
@@ -342,7 +341,7 @@ app.delete('/:id_user/foods/:id_food', async(req,res,next)=>{
 //FriendRelation Routers
 
 // SELECT all friends with current user -functional
-app.get("/:id_user/friendRelations", async(req,res,next)=>{
+app.get("/friendRelations/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
@@ -361,7 +360,7 @@ app.get("/:id_user/friendRelations", async(req,res,next)=>{
 });
 
 // INSERT friend with current user -functional
-app.post("/:id_user1/friendRelation",async(req,res,next)=>{
+app.post("/friendRelation/:id_user1",async(req,res,next)=>{
   try{
     const user =await User.findByPk(req.params.id_user1)
     if(user){
@@ -378,9 +377,9 @@ app.post("/:id_user1/friendRelation",async(req,res,next)=>{
 });
 
 // UPDATE friendRelation -functional
-app.put('/:id_user/friendRelation/:user_id2',async(req,res,next)=>{
+app.put('/friendRelation/:id_user1/:user_id2',async(req,res,next)=>{
   try{
-    const user=await User.findByPk(req.params.id_user)
+    const user=await User.findByPk(req.params.id_user1)
     if(user)
     {
       const friends =await user.getFriendRelations({ where: {user_id2: req.params.user_id2}})

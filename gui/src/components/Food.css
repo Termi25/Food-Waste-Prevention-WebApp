@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+.food-item{
+    height:7em;
+    width:20em;
+    background-color: #41644A;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 4px;
+    color:#F2E3DB
+}
+
+.labelsFoodSection{
+    font-family: Comfortaa;
+    font-size: medium;
+}
+
+.food_name,.food_type,.expiration_date{
+    font-family: Comfortaa;
+    margin:3px;
+}
+
+.btnGeneral{
+    font-family: Comfortaa;
+    font-weight: bold;
+    padding:3px;
+    background-color: #263A29 ;
+    color:#F2E3DB;
+    transition:0.3s;
+    border:none;
+    margin:1px;
+    border-radius:4px;
+}
+
+.btnGeneral:hover{
+    background-color:#FFB000
+}
+
+#checkboxFood{
+    width:1.5em;
+    height:1.5em;
+}

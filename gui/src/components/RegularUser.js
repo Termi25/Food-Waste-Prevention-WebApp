@@ -6,10 +6,10 @@ function User (props) {
   return (
     <div className='regular-user'>
       <div className='email'>
-        {item.email}
+        {item.emailAdress}
       </div>
-      <div className='password'>
-        {item.password}
+      <div className='username'>
+        {item.username}
       </div>
     </div>
   )

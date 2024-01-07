@@ -1,0 +1,97 @@
+.userREG-form {
+    height: 350px;
+    width: 350px;
+    margin: 5px;
+    display: flex;
+    background-color: #004225;
+    border-radius: 5%;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding: 10px;
+  }
+
+  #p{
+    text-align: center;
+    color:white;
+  }
+  
+  .user-form .email {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .username {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-form .password {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .passwordC {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .typeEater {
+    height: 30px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .addREG {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .add {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #boxEmail,#boxPass,#btnAddREG,#btnBack,#boxName,#boxPassC,#boxType{
+    font-size: 18px;
+    border:none;
+    border-bottom:2px solid black;
+    background-color: white;
+  }
+
+  #boxType{
+    width:225px;
+  }
+  
+  #btnAddREG,#btnBack,#btnAddREG:hover,#btnBack:hover{
+    background-color:#191919;
+    color:white;
+    border-radius: 10%;
+    width: 100px;
+    height:40px;
+    transition: 0.3s;
+  }
+  #btnAddREG:hover,#btnBack:hover{
+    background-color:#FFB000;
+  }
+  

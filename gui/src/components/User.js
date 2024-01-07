@@ -1,6 +1,4 @@
-import "./User.css";
 import RegularUser from "./RegularUser";
-import PowerUser from "./PowerUser";
 
 function User(props) {
   const { item } = props; // object destructuring for accessing the data sent by the "UserList" parent component

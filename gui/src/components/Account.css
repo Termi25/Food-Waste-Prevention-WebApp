@@ -1,0 +1,89 @@
+#mainAccount{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: left;
+    height:100%;
+    width:100%;
+}
+
+.divAccount{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items:left;
+    padding:10px;
+    width:50vw;
+    height:15em;
+    margin:5px;
+    margin-left:1px;
+    margin-top:15px;
+    background-color: #E86A33;
+    border-radius: 2%;
+}
+
+.divAccountDetail{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    height:3em;
+    width:fit-content;
+}
+
+.pageHeaderTitle{
+    color:#F2E3DB;
+    text-decoration:underline;
+}
+
+.FoodList{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    width:fit-content;
+    height:fit-content;
+    background-color: #E86A33;
+    border-radius: 4px;
+    flex-grow: 3;
+    background-size: cover;
+}
+
+.titleNBtns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:5px;
+    height: fit-content;
+}
+
+.btnPrimary,#btnLogOut{
+    font-family: Comfortaa;
+    font-weight: bold;
+    font-size: large;
+    padding:3px;
+    background-color: #41644A ;
+    color:#F2E3DB;
+    transition:0.3s;
+    border:none;
+    margin:1px;
+    border-radius:4px;
+    padding:10px
+}
+
+.btnPrimary:hover,#btnLogOut:hover{
+    background-color:#FFB000
+}
+
+.field{
+    font-family: Comfortaa;
+    font-size:medium;
+    width:25vw;
+    height:2vh;
+    margin-left:10px;
+    color:#F2E3DB;
+    background-color: #E86A33;
+    border:none;
+}
+
+.labelsAccountSection{
+    font-weight: bold;
+}

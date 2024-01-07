@@ -1,10 +1,8 @@
 
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import {  useState } from 'react'
 import "./Login.css"
-import User from './User'
 import UserForm from './UserForm'
-import './UserList.css'
 
 const SERVER = 'http://localhost:8080'
 
@@ -12,8 +10,9 @@ function Login (props) {
 
   const [isLoggedIn, setIsLoggedIn]=useState(false);
   const [authId,setAuthId]=useState(0);
+
   const navigate = useNavigate();
-  
+
   const verifyUser = async user => {
     const response=await fetch(`${SERVER}/auth`, {
       method: 'post',
@@ -22,16 +21,29 @@ function Login (props) {
       },
       body: JSON.stringify(user)
     })
+    setIsLoggedIn(false);
+    setAuthId(0);
     if(response.status!==401){
       setIsLoggedIn(true);
-      response.json().then((user)=>{setAuthId(user.id_user)})
-      navigate('/account',{state:{authId,isLoggedIn}});
+      response.json().then((user)=>setAuthId(user.id_user))
+      console.log(isLoggedIn,authId)
+      if(isLoggedIn===true){
+        navigate('/account',{state:{authId,isLoggedIn}});
+      }
+    }else{
+      alert('There is no such account. Please register!')
     }
   }
 
+  const registerRedirect=()=>{
+    navigate('/register');
+  }
+
   return (
-    <div className='user-login'>
+    <div className='mainLogin'>
+      <p>Food Waste Preventer</p>
       <UserForm onAdd={verifyUser}/>
+      <input type="button" id="btnRegister" value="Register" onClick={registerRedirect}/>
     </div>
   )
 }

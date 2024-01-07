@@ -1,18 +1,18 @@
 import "./App.css";
-import { BrowserRouter, Route,Router, Navigate,Routes, Switch } from "react-router-dom";
+import { BrowserRouter, Route,Routes } from "react-router-dom";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Account from "./components/Account.js";
-
-// import MainHeader from "./components/MainHeader.js";
-// import MovieDetail from "./components/MovieDetail";
+import GiveAwayCenter from "./components/GiveAwayCenter.js";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login></Login>}/>
-        <Route path="/account" element={<Account></Account>}/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/account" element={<Account/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/giveawaycenter" element={<GiveAwayCenter/>}/>
       </Routes>
     </BrowserRouter>
   );
