@@ -21,6 +21,7 @@ function UserForm(props) {
           id="boxEmail"
           type="email"
           placeholder="Email"
+          defaultValue={email}
           onChange={(evt) => setEmail(evt.target.value)}
           required
         />
@@ -30,6 +31,7 @@ function UserForm(props) {
           id="boxPass"
           type="password"
           placeholder="Password"
+          defaultValue={password}
           onChange={(evt) => setPassword(evt.target.value)}
           required
         />

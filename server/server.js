@@ -72,6 +72,10 @@ const Food=sequelize.define("food",{
           len:[3,200]
       },
   },
+  Claimable:{
+    type:Sequelize.BOOLEAN,
+    allowNull:false,
+  }
 });
 
 const FriendRelation=sequelize.define("friendRelation",{
@@ -281,7 +285,7 @@ app.get("/foods/:id_user", async(req,res,next)=>{
 });
 
 // INSERT food with certain user -functional
-app.post("/:id_user/foods",async(req,res,next)=>{
+app.post("/foods/:id_user",async(req,res,next)=>{
   try{
     const user =await User.findByPk(req.params.id_user)
     if(user){
@@ -319,7 +323,7 @@ app.put('/foods/:id_user/:id_food',async(req,res,next)=>{
 });
 
 // DELETE food with certain user -functional
-app.delete('foods/:id_user/:id_food', async(req,res,next)=>{
+app.delete('/foods/:id_user/:id_food', async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){

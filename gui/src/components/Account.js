@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import Food from './Food'
 
 const SERVER = 'http://localhost:8080'
-const Account=()=>{
+const Account=(props)=>{
     const {state}=useLocation();
-    const authId=state.authId
-    const isLoggedIn=state.isLoggedIn
+    const [isLoggedIn, setIsLoggedIn]=useState(state.isLoggedIn);
+    const [authId,setAuthId]=useState(state.authId);
     const [username, setUsername]=useState("-");
     // const [password,setPassword]=useState("-");
     const [emailAdress,setEmailAdress]=useState("-");
@@ -99,7 +99,11 @@ const Account=()=>{
     return (
         <div id="mainAccount">
             <div className="accountDetails">
-                <Link to="/giveawaycenter"><p className='pageHeaderTitle'>WasteNOT</p></Link>
+                <Link to="/giveawaycenter"
+                    state={{
+                        authId,
+                        isLoggedIn
+                    }}><p className='pageHeaderTitle'>WasteNOT</p></Link>
                 <UserData />
                 <button id="btnLogOut" onClick={LogOut}>Log Out</button>
             </div>

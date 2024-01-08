@@ -13,38 +13,42 @@ function Login (props) {
 
   const navigate = useNavigate();
 
-  const verifyUser = async user => {
-    const response=await fetch(`${SERVER}/auth`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-    setIsLoggedIn(false);
-    setAuthId(0);
-    if(response.status!==401){
-      setIsLoggedIn(true);
-      response.json().then((user)=>setAuthId(user.id_user))
-      console.log(isLoggedIn,authId)
-      if(isLoggedIn===true){
-        navigate('/account',{state:{authId,isLoggedIn}});
-      }
-    }else{
-      alert('There is no such account. Please register!')
-    }
-  }
+  function LoginForm(){
 
-  const registerRedirect=()=>{
-    navigate('/register');
+    const verifyUser = async user => {
+      const response=await fetch(`${SERVER}/auth`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+      if(response.status!==401){
+        setIsLoggedIn(true);
+        response.json().then((user)=>setAuthId(user.id_user))
+        if(isLoggedIn===true){
+          navigate('/account',{state:{authId,isLoggedIn}});
+        }
+      }else{
+        alert('There is no such account. Please register!')
+      }
+    }
+  
+    const registerRedirect=()=>{
+      navigate('/register');
+    }
+
+    return(
+      <div className='mainLogin'>
+        <p>Food Waste Preventer</p>
+        <UserForm onAdd={verifyUser}/>
+        <input type="button" id="btnRegister" value="Register" onClick={registerRedirect}/>
+      </div>
+    );
   }
 
   return (
-    <div className='mainLogin'>
-      <p>Food Waste Preventer</p>
-      <UserForm onAdd={verifyUser}/>
-      <input type="button" id="btnRegister" value="Register" onClick={registerRedirect}/>
-    </div>
+    <LoginForm/>
   )
 }
 
