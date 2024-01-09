@@ -87,7 +87,7 @@ const Account=(props)=>{
             const data = await response.json()
         setFood(data)
         }catch(err){
-            alert('Dont forget to add the food in your fridge!')
+            // alert('Dont forget to add the food in your fridge!')
         }
       }
 
@@ -95,7 +95,7 @@ const Account=(props)=>{
         try{
             getFood()
         }catch(err){
-            alert('Dont forget to add the food in your fridge!')
+            // alert('Dont forget to add the food in your fridge!')
         }
       },[authId])
 

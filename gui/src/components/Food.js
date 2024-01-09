@@ -2,8 +2,13 @@ import './Food.css'
 
 function Food (props) {
     const { item } = props
+    
     function setCheck(){
-
+        if(item.Claimable===false){
+            return "Not visible for claim"
+        }else{
+            return "Visible for claim"
+        }
     }
     return (
     <div className='food-item'>
@@ -21,6 +26,10 @@ function Food (props) {
         <div className='expiration_date'>
             <label className="labelsFoodSection">EXPIRATION DATE :  </label>
             {item.ExpirationDate}
+        </div>
+        <div className='visibility'>
+            <label className="labelsFoodSection">VISIBILITY :  </label>
+            {setCheck()}
         </div>
         {/* <button className='btnGeneral'>Remove</button>
         <button className='btnGeneral'>Mark to give away</button> */}

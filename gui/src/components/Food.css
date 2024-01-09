@@ -18,7 +18,7 @@
     font-size: medium;
 }
 
-.food_name,.food_type,.expiration_date{
+.food_name,.food_type,.expiration_date,.visibility{
     font-family: Comfortaa;
     margin:3px;
 }
