@@ -11,13 +11,16 @@ const Account=(props)=>{
     // const [authId,setAuthId]=useState(state.authId);
     const authId=useSelector((state)=>state.authId)
     const isLoggedIn=useSelector((state)=>state.isLoggedIn)
-    const [username, setUsername]=useState("-");
-    // const [password,setPassword]=useState("-");
-    const [emailAdress,setEmailAdress]=useState("-");
-    const [typeOfEater,setTypeOfEater]=useState("-");
-    const [createdAt,setCreatedAt]=useState("-");
+
+    const [username, setUsername]=useState("-")
+    // const [password,setPassword]=useState("-")
+    const [emailAdress,setEmailAdress]=useState("-")
+    const [typeOfEater,setTypeOfEater]=useState("-")
+    const [createdAt,setCreatedAt]=useState("-")
     const [food,setFood]=useState([])
-    const navigate=useNavigate();
+
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
     
     function UserData(){
         useEffect(()=>{
@@ -77,7 +80,7 @@ const Account=(props)=>{
     }
 
     function LogOut(){
-        alert('Succesful LogOff');
+        dispatch({type:'logout'});
         navigate('/');
     }
 
@@ -106,7 +109,7 @@ const Account=(props)=>{
                     state={{
                         authId,
                         isLoggedIn
-                    }}><p className='pageHeaderTitle'>WasteNOT</p></Link>
+                    }}><p className='pageHeaderTitle' id='toCenter'>WasteNOT</p></Link>
                 <UserData />
                 <button id="btnLogOut" onClick={LogOut}>Log Out</button>
             </div>

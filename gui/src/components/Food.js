@@ -12,9 +12,6 @@ function Food (props) {
     }
     return (
     <div className='food-item'>
-        <div>
-            <input type='checkbox' id='checkboxFood' onChange={setCheck()}/>
-        </div>
         <div className='food_name'>
             <label className="labelsFoodSection">NAME :  </label>
             {item.food_name}

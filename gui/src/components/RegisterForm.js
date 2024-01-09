@@ -28,7 +28,7 @@ function RegisterForm(props) {
 
   return (
     <div className="userREG-form">
-        <p id="p">Register for Food Waste Prevention</p>
+        <p id="p">Register for WasteNOT</p>
         <div className="username">
         <input
           id="boxName"
@@ -57,7 +57,7 @@ function RegisterForm(props) {
         />
       </div>
       <div className="typeEater">
-      <select id="boxType" name="type" size="1" required onChange={(evt) => setTypeOfEater(evt.target.value)}>
+        <select id="boxType" name="type" size="1" required onChange={(evt) => setTypeOfEater(evt.target.value)}>
             <option value="mixed">Mixed</option>
             <option value="carnivorous">Carnivorous</option>
             <option value="vegetarian">Vegetarian</option>

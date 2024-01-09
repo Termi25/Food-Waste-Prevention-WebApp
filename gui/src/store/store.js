@@ -9,6 +9,12 @@ const loginReducer=(state=initialState,action)=>{
             isLoggedIn:!state.isLoggedIn
         }
     }
+    if(action.type==='logout'){
+        return{
+            authId:0,
+            isLoggedIn:!state.isLoggedIn
+        }
+    }
     return state
 }
 

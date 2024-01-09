@@ -4,18 +4,20 @@
     margin: 5px;
     display: flex;
     background-color: #004225;
+    filter: drop-shadow(5px 5px 0px #FF9F29);
     border-radius: 5%;
     align-items: center;
     justify-content: center;
-    flex-flow: row wrap;
+    flex-direction: column;
     padding: 10px;
+    gap:15px;
   }
 
   #p{
     text-align: center;
     color:white;
   }
-  
+
   .user-form .email {
     height: 30px;
     width: 200px;
@@ -49,7 +51,7 @@
   }
 
   .user-form .typeEater {
-    height: 30px;
+    height: 50px;
     width: 250px;
     display: flex;
     align-items: center;
@@ -77,10 +79,12 @@
     border:none;
     border-bottom:2px solid black;
     background-color: white;
+    padding:5px;
+    border-radius: 4px;
   }
 
   #boxType{
-    width:225px;
+    width:230px;
   }
   
   #btnAddREG,#btnBack,#btnAddREG:hover,#btnBack:hover{

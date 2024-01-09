@@ -1,7 +1,8 @@
-const express = require("express");
-const cors = require("cors");
+import express, { json } from "express";
+import cors from "cors";
 
-const Sequelize = require("sequelize");
+import Sequelize from "sequelize";
+const { UUID, UUIDV4, STRING, DATEONLY, BOOLEAN, Op}=Sequelize
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
@@ -12,12 +13,12 @@ const sequelize = new Sequelize({
 
 const User =sequelize.define("user",{
   id_user:{
-      type: Sequelize.UUID,
-      defaultValue:Sequelize.UUIDV4,
+      type: UUID,
+      defaultValue:UUIDV4,
       primaryKey: true,
   },
   username: {
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull: false,
       unique:true,
       validate:{
@@ -25,14 +26,14 @@ const User =sequelize.define("user",{
       },
   },
   password:{
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull:false,
       validate:{
           len:[8,64],        
       },
   },
   emailAdress:{
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull:false,
       unique: true,
       validate:{
@@ -40,7 +41,7 @@ const User =sequelize.define("user",{
       },
   },
   typeOfEater:{
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull:false,
       validate:{
           len:[3,200]
@@ -50,74 +51,74 @@ const User =sequelize.define("user",{
 
 const Food=sequelize.define("food",{
   id_food:{
-      type: Sequelize.UUID,
-      defaultValue:Sequelize.UUIDV4,
+      type: UUID,
+      defaultValue:UUIDV4,
       primaryKey: true,
   },
   food_name: {
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull: false,
       validate:{
           len:[3,200],
       },
   },
   ExpirationDate:{
-      type:Sequelize.DATEONLY,
+      type:DATEONLY,
       allowNull:false,
   },
   FoodType:{
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull:false,
       validate:{
           len:[3,200]
       },
   },
   Claimable:{
-    type:Sequelize.BOOLEAN,
+    type:BOOLEAN,
     allowNull:false,
   }
 });
 
 const FriendRelation=sequelize.define("friendRelation",{
   id_friendRel:{
-      type: Sequelize.UUID,
-      defaultValue:Sequelize.UUIDV4,
+      type: UUID,
+      defaultValue:UUIDV4,
       primaryKey: true,
   },
   status: {
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull: false,
       defaultValue:"pending",
   },
   eticheta1:{
-    type:Sequelize.STRING,
+    type:STRING,
       allowNull: false,
       defaultValue:"-",
   },
   eticheta2:{
-    type:Sequelize.STRING,
+    type:STRING,
       allowNull: false,
       defaultValue:"-",
   },
   user_id2:{
-    type:Sequelize.UUIDV4,
+    type:UUIDV4,
     allowNull:false
   },
 });
 
 const ClaimRequest=sequelize.define("claimRequest",{
   id_claim:{
-      type: Sequelize.UUID,
-      defaultValue:Sequelize.UUIDV4,
+      type: UUID,
+      defaultValue:UUIDV4,
       primaryKey: true,
   },
   status: {
-      type:Sequelize.STRING,
+      type:STRING,
       allowNull: false,
       defaultValue:"pending",
   },
   requestMessage:{
-    type:Sequelize.STRING,
+    type:STRING,
       allowNull: false,
       defaultValue:"i would like to take that product off your hands.",
   },
@@ -131,7 +132,7 @@ User.hasMany(ClaimRequest)
 Food.hasMany(ClaimRequest)
 
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 //User Routers
 
@@ -188,6 +189,20 @@ app.get("/users/:id_user",async (req,res,next)=>{
     if(users.length===1){
       const user=users.shift()
       return res.status(201).json(user);
+    }else{
+      return res.status(401).json({message:"Invalid user identifier"});
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
+//SELECT  all user From users by !id -functional
+app.get("/users/not/:id_user",async (req,res,next)=>{
+  try{
+    const users=await User.findAll({ where: { userIdUser:{[Op.ne]:req.params.id_user}}})
+    if(users.length>0){
+      return res.status(201).json(users);
     }else{
       return res.status(401).json({message:"Invalid user identifier"});
     }
@@ -271,6 +286,25 @@ app.get("/foods/:id_user", async(req,res,next)=>{
     const user=await User.findByPk(req.params.id_user)
     if(user){
       const foods=await user.getFood()
+      if(foods.length >0){
+        res.json(foods)
+      }else{
+        res.sendStatus(204)
+      }
+    }else{
+      res.sendStatus(404)
+    }
+  }catch(err){
+    next(err)
+  }
+});
+
+// SELECT all food not owned by user and claimable -functional
+app.get("/foods/not/:id_user", async(req,res,next)=>{
+  try{
+    const user=await User.findByPk(req.params.id_user)
+    if(user){
+      const foods=await Food.findAll({ where: { userIdUser:{[Op.ne]:req.params.id_user}, Claimable:true}})
       if(foods.length >0){
         res.json(foods)
       }else{

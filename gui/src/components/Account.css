@@ -33,6 +33,11 @@
 .pageHeaderTitle{
     color:#F2E3DB;
     text-decoration:underline;
+    transition: 0.5s;
+}
+
+#toCenter:hover{
+    color:#E86A33
 }
 
 .FoodList{
