@@ -1,13 +1,16 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
 import "./Account.css"
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import Food from './Food'
 
 const SERVER = 'http://localhost:8080'
 const Account=(props)=>{
-    const {state}=useLocation();
-    const [isLoggedIn, setIsLoggedIn]=useState(state.isLoggedIn);
-    const [authId,setAuthId]=useState(state.authId);
+    // const {state}=useLocation();
+    // const [isLoggedIn, setIsLoggedIn]=useState(state.isLoggedIn);
+    // const [authId,setAuthId]=useState(state.authId);
+    const authId=useSelector((state)=>state.authId)
+    const isLoggedIn=useSelector((state)=>state.isLoggedIn)
     const [username, setUsername]=useState("-");
     // const [password,setPassword]=useState("-");
     const [emailAdress,setEmailAdress]=useState("-");
@@ -39,12 +42,12 @@ const Account=(props)=>{
                                 setCreatedAt(date)
                             })
                         }catch(err){
-                            alert('Dont forget to add the food in your fridge!')
+                            // alert('Dont forget to add the food in your fridge!')
                         }
                     }  
                 }else{
-                    alert('Succesful LogOff');
-                    navigate('/');
+                    // alert('Succesful LogOff');
+                    // navigate('/');
                 }
             }
             fetchUser();
@@ -94,7 +97,7 @@ const Account=(props)=>{
         }catch(err){
             alert('Dont forget to add the food in your fridge!')
         }
-      },[])
+      },[authId])
 
     return (
         <div id="mainAccount">
