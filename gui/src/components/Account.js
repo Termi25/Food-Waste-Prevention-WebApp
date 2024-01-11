@@ -13,11 +13,16 @@ const Account=(props)=>{
     const isLoggedIn=useSelector((state)=>state.isLoggedIn)
 
     const [username, setUsername]=useState("-")
-    // const [password,setPassword]=useState("-")
     const [emailAdress,setEmailAdress]=useState("-")
     const [typeOfEater,setTypeOfEater]=useState("-")
     const [createdAt,setCreatedAt]=useState("-")
+
     const [food,setFood]=useState([])
+
+    const [foodName,setFoodName]=useState("")
+    const [expiration,setExpiration]=useState("")
+    const [foodType,setFoodType]=useState("")
+    const [claimable,setClaimable]=useState(false)
 
     const navigate=useNavigate()
     const dispatch=useDispatch()
@@ -53,6 +58,7 @@ const Account=(props)=>{
                     // navigate('/');
                 }
             }
+
             fetchUser();
         });
 
@@ -88,11 +94,32 @@ const Account=(props)=>{
         try{
             const response = await fetch(`${SERVER}/foods/${authId}`)
             const data = await response.json()
-        setFood(data)
+            setFood(data)
         }catch(err){
             // alert('Dont forget to add the food in your fridge!')
         }
-      }
+    }
+
+    const addFoodtoDB = async () => {
+        try{
+            const food_to_add={food_name:foodName,ExpirationDate:expiration,FoodType:foodType,Claimable:claimable}
+            const response=await fetch(`${SERVER}/foods/${authId}`, {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(food_to_add)
+            })
+            if(response.status===201){
+                getFood()
+            }
+            document.getElementById('boxFName').value = ''
+            document.getElementById('boxFType').value = ''
+
+        }catch(err){
+            
+        }
+    }
 
     useEffect(() => {
         try{
@@ -101,6 +128,7 @@ const Account=(props)=>{
             // alert('Dont forget to add the food in your fridge!')
         }
       },[authId])
+
 
     return (
         <div id="mainAccount">
@@ -113,14 +141,53 @@ const Account=(props)=>{
                 <UserData />
                 <button id="btnLogOut" onClick={LogOut}>Log Out</button>
             </div>
-            <div>
+            <div className='FoodList'>
                 <div className='titleNBtns'>
                     <p className='pageHeaderTitle'>FOOD LIST</p>
-                    <button className='btnPrimary'>Add food</button>
                 </div>
                 <div className='FoodList'>
                     {food.length > 0 && food?.map(e => <Food key={e.id_food} item={e} />)}
                 </div>
+            </div>
+            <div className='FoodAdder'>
+                <p className='pageHeaderTitle'>FOOD Adder</p>
+                <div className="divFoodAdder">
+                    <label className="labelsFoodAdderSection">Food Name</label>
+                    <input
+                    id="boxFName"
+                    type="text"
+                    placeholder="Food Name"
+                    onChange={(evt) => setFoodName(evt.target.value)}
+                    required
+                    />
+                </div>
+                <div className="divFoodAdder">
+                    <label className="labelsFoodAdderSection">Expiration Date</label>
+                    <input
+                    id="boxExpiration"
+                    type="date"
+                    onChange={(evt) => setExpiration(evt.target.value)}
+                    required
+                    />
+                </div>
+                <div className="divFoodAdder">
+                    <label className="labelsFoodAdderSection">Food Type</label>
+                    <input
+                    id="boxFType"
+                    type="text"
+                    placeholder="Food Type"
+                    onChange={(evt) => setFoodType(evt.target.value)}
+                    required
+                    />
+                </div>
+                <div className="divFoodAdder">
+                    <label className="labelsFoodAdderSection">Claimable</label>
+                    <select id="boxClaim" name="type" size="1" required onChange={(evt) => setClaimable(evt.target.value)}>
+                        <option value="false">False</option>
+                        <option value="true">True</option>
+                    </select>
+                </div>
+                <button className='btnPrimary' onClick={addFoodtoDB}>Add food</button>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@
     align-items: left;
     height:100%;
     width:100%;
+    margin-left:5px;
 }
 
 .divAccount{
@@ -13,16 +14,15 @@
     justify-content: left;
     align-items:left;
     padding:10px;
-    width:50vw;
+    width:40vw;
     height:15em;
     margin:5px;
-    margin-left:1px;
     margin-top:15px;
     background-color: #E86A33;
     border-radius: 2%;
 }
 
-.divAccountDetail{
+.divAccountDetail,.divFoodAdder{
     display: flex;
     justify-content:space-between;
     align-items: center;
@@ -30,17 +30,31 @@
     width:fit-content;
 }
 
+.divFoodAdder{
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    width:10vw;
+    height:6vh;
+}
+
+#boxFName,#boxExpiration,#boxFType,#boxClaim{
+    width:10vw;
+    height:2vh;
+}
+
 .pageHeaderTitle{
     color:#F2E3DB;
     text-decoration:underline;
     transition: 0.5s;
+    margin-left:5px;
 }
 
 #toCenter:hover{
     color:#E86A33
 }
 
-.FoodList{
+.FoodList,.FoodAdder{
     display: flex;
     flex-direction: column;
     padding:10px;
@@ -50,6 +64,7 @@
     border-radius: 4px;
     flex-grow: 3;
     background-size: cover;
+    margin-right:5px
 }
 
 .titleNBtns{
@@ -69,9 +84,12 @@
     color:#F2E3DB;
     transition:0.3s;
     border:none;
-    margin:1px;
     border-radius:4px;
-    padding:10px
+    padding:10px;
+}
+
+#btnLogOut{
+    margin-left:5px;
 }
 
 .btnPrimary:hover,#btnLogOut:hover{
