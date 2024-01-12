@@ -197,14 +197,31 @@ app.get("/users/:id_user",async (req,res,next)=>{
   }
 });
 
-//SELECT  all user From users by !id -functional
+//SELECT all user From users by !id -functional
 app.get("/users/not/:id_user",async (req,res,next)=>{
   try{
-    const users=await User.findAll({ where: { userIdUser:{[Op.ne]:req.params.id_user}}})
+    const users=await User.findAll({ where: { id_user:{[Op.ne]:req.params.id_user}}})
     if(users.length>0){
       return res.status(201).json(users);
     }else{
       return res.status(401).json({message:"Invalid user identifier"});
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
+//SELECT user From users by email -functional
+app.get("/users",async (req,res,next)=>{
+  try{
+    const {email}=req.body;
+
+    const users=await User.findAll({ where: { emailAdress:email}})
+    if(users.length===1){
+      const user=users.shift()
+      res.status(201).json(user);
+    }else{
+      res.status(401).json({message:"Invalid user email"});
     }
   }catch(err){
     next(err);

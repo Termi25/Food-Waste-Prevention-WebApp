@@ -1,14 +1,17 @@
-import RegularUser from "./RegularUser";
+import './User.css'
 
-function User(props) {
-  const { item } = props; // object destructuring for accessing the data sent by the "UserList" parent component
-
-  //pass data to RegularUser/PowerUser component through props (named "item" in this case)
+function User (props) {
+  const { item } = props
   return (
-    <div className="user">
-      <RegularUser item={item} />
+    <div className='user'>
+      <div className='username'>
+        {item.username}
+      </div>
+      <div className='email'>
+        {item.emailAdress}
+      </div>
     </div>
-  );
+  )
 }
 
-export default User;
+export default User

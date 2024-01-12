@@ -8,7 +8,7 @@
     margin-left:5px;
 }
 
-.divAccount{
+.divAccount,.FoodAdder{
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -51,7 +51,7 @@
 }
 
 #toCenter:hover{
-    color:#E86A33
+    color:#FFB000
 }
 
 .FoodList,.FoodAdder{
@@ -62,7 +62,6 @@
     height:fit-content;
     background-color: #E86A33;
     border-radius: 4px;
-    flex-grow: 3;
     background-size: cover;
     margin-right:5px
 }
