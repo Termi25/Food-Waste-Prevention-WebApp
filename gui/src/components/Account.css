@@ -15,7 +15,7 @@
     align-items:left;
     padding:10px;
     width:40vw;
-    height:15em;
+    height:20vh;
     margin:5px;
     margin-top:15px;
     background-color: #E86A33;
@@ -34,7 +34,7 @@
     flex-direction: column;
     align-items: left;
     justify-content: left;
-    width:10vw;
+    width:17vw;
     height:6vh;
 }
 

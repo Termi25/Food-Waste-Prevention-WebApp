@@ -172,13 +172,23 @@ const Account=(props)=>{
                 </div>
                 <div className="divFoodAdder">
                     <label className="labelsFoodAdderSection">Food Type</label>
-                    <input
-                    id="boxFType"
-                    type="text"
-                    placeholder="Food Type"
-                    onChange={(evt) => setFoodType(evt.target.value)}
-                    required
-                    />
+                    <select id="bboxFType" name="type" size="1" required onChange={(evt) => setFoodType(evt.target.value)}>
+                        <option value="Bauturi alcoolice">Bauturi alcoolice</option>
+                        <option value="Bauturi non-alcoolice">Bauturi non-alcoolice</option>
+                        <option value="Cafea">Cafea</option>
+                        <option value="Cereale">Cereale</option>
+                        <option value="Conserve">Conserve</option>
+                        <option value="Dulciuri">Dulciuri</option>
+                        <option value="Fructe">Fructe</option>
+                        <option value="Ingrediente culinare">Ingrediente culinare</option>
+                        <option value="Lactate">Lactate</option>
+                        <option value="Legume">Legume</option>
+                        <option value="Mezeluri si carne">Mezeluri si carne</option>
+                        <option value="Oua">Oua</option>
+                        <option value="Panificatie">Mezeluri si carne</option>
+                        <option value="Produse congelate">Produse congelate</option>
+                        <option value="Snacks">Snacks</option>
+                    </select>
                 </div>
                 <div className="divFoodAdder">
                     <label className="labelsFoodAdderSection">Claimable</label>
