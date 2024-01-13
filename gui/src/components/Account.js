@@ -92,7 +92,7 @@ const Account=(props)=>{
 
     const getUsers = async () => {
         try{
-            const response = await fetch(`${SERVER}/users/friends/${authId}`)
+            const response = await fetch(`${SERVER}/friendRelations/${authId}`)
             const data = await response.json()
             setUsers(data)
         }catch(err){

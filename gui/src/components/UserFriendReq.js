@@ -9,32 +9,33 @@ function UserReq (props) {
     
     async function addFriend(){
         const email=item.emailAdress;
-        const response=await fetch(`${SERVER}/users/friends/${email}`, {    
-            method: 'get',    
+        const response=await fetch(`${SERVER}/friendRelation/${authId}/${email}`, {    
+            method: 'post',    
             headers: {    
                 'Content-Type': 'application/json'  
             },      
         })    
         if(response.status===201){
-            response.json().then((user)=>{setID(user.id_user)})    
+            // response.json().then((user)=>{setID(user.id_user)})
+            console.log('ok')    
         }    
     }
 
-    async function setID(x){
-        friendID=x;
-        var user2={"user_id2":friendID}
-        console.log(user2)
-        const response2=await fetch(`${SERVER}/friendRelation/${authId}`, {
-                method: 'post',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user2)
-            })
-            if(response2.status===201){
-                console.log('ok')
-            }
-    }
+    // async function setID(x){
+    //     friendID=x;
+    //     var user2={"user_id2":friendID}
+    //     console.log(user2)
+    //     const response2=await fetch(`${SERVER}/friendRelation/${authId}`, {
+    //             method: 'post',
+    //             headers: {
+    //               'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(user2)
+    //         })
+    //         if(response2.status===201){
+    //             console.log('ok')
+    //         }
+    // }
 
     return (
         <div className='user'>

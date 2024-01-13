@@ -432,7 +432,12 @@ app.get("/friendRelations/:id_user", async(req,res,next)=>{
     if(user){
       const friends=await user.getFriendRelations()
       if(friends.length >0){
-        res.json(friends)
+        let friendsDetailed=[]
+        for(let i=0;i<friends.length;i++){
+          let query=await User.findByPk(friends[i].user_id2)
+          friendsDetailed.push(query)
+        }
+        res.status(201).json(friendsDetailed)
       }else{
         res.sendStatus(204)
       }
@@ -450,6 +455,24 @@ app.post("/friendRelation/:id_user1",async(req,res,next)=>{
     const user =await User.findByPk(req.params.id_user1)
     if(user){
       const friend=await FriendRelation.create(req.body)
+      user.addFriendRelation(friend)
+      await user.save()
+      res.status(201).location(friend.id_friendRel).send()
+    }else{
+      res.sendStatus(404)
+    }
+  }catch(err){
+    next(err)
+  }
+});
+
+// INSERT friend by email with current user -functional
+app.post("/friendRelation/:id_user1/:email",async(req,res,next)=>{
+  try{
+    const user =await User.findByPk(req.params.id_user1)
+    const friendtoAdd=await User.findAll({where:{emailAdress:req.params.email}})
+    if(user){
+      const friend=await FriendRelation.create({user_id2:friendtoAdd[0].id_user})
       user.addFriendRelation(friend)
       await user.save()
       res.status(201).location(friend.id_friendRel).send()
