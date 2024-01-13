@@ -197,11 +197,43 @@ app.get("/users/:id_user",async (req,res,next)=>{
   }
 });
 
-//SELECT all user From users by !id -functional
+//SELECT all user From users by !id and !friends -functional
 app.get("/users/not/:id_user",async (req,res,next)=>{
   try{
-    const users=await User.findAll({ where: { id_user:{[Op.ne]:req.params.id_user}}})
+    let users=await User.findAll({ where: { id_user:{[Op.ne]:req.params.id_user}}})
+    const friends=await FriendRelation.findAll({where:{userIdUser:req.params.id_user}})
     if(users.length>0){
+      if(friends.length>0){
+        for(let i=0;i<users.length;i++){
+          for(let j=0;j<friends.length;j++){
+              if(users[i].id_user===friends[j].user_id2){
+                users.splice(i,1)
+              }
+          }
+        }    
+      }
+      return res.status(201).json(users);
+    }else{
+      return res.status(401).json({message:"Invalid user identifier"});
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
+//SELECT all user From users by !id and friends -functional
+app.get("/users/friends/:id_user",async (req,res,next)=>{
+  try{
+    let users=await User.findAll({ where: { id_user:{[Op.ne]:req.params.id_user}}})
+    const friends=await FriendRelation.findAll({where:{userIdUser:req.params.id_user}})
+    if(users.length>0){
+      if(friends.length>0){
+        for(let i=0;i<users.length;i++){
+            if(users[i].id_user!==friends[i].user_id2){
+              users.splice(i,1)
+            }
+        }    
+      }
       return res.status(201).json(users);
     }else{
       return res.status(401).json({message:"Invalid user identifier"});
@@ -212,11 +244,9 @@ app.get("/users/not/:id_user",async (req,res,next)=>{
 });
 
 //SELECT user From users by email -functional
-app.get("/users",async (req,res,next)=>{
+app.get("/users/friends/:email",async (req,res,next)=>{
   try{
-    const {email}=req.body;
-
-    const users=await User.findAll({ where: { emailAdress:email}})
+    const users=await User.findAll({ where: { emailAdress:req.params.email}})
     if(users.length===1){
       const user=users.shift()
       res.status(201).json(user);
@@ -302,7 +332,7 @@ app.get("/foods/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
-      const foods=await user.getFood()
+      const foods=await Food.findAll({ where: { userIdUser:req.params.id_user},order:['FoodType','ExpirationDate']})
       if(foods.length >0){
         res.json(foods)
       }else{

@@ -22,12 +22,19 @@
     border-radius: 2%;
 }
 
-.divAccountDetail,.divFoodAdder{
+.divAccountDetail,.divFoodAdder,.accountDetailsLower{
     display: flex;
     justify-content:space-between;
     align-items: center;
-    height:3em;
+    height:5vh;
     width:fit-content;
+}
+
+.accountDetailsLower{
+    align-items: baseline;
+    justify-content: space-between;
+    width: 41.5vw;
+    height:fit-content;
 }
 
 .divFoodAdder{
@@ -89,6 +96,7 @@
 
 #btnLogOut{
     margin-left:5px;
+    flex-grow: 0.5;
 }
 
 .btnPrimary:hover,#btnLogOut:hover{

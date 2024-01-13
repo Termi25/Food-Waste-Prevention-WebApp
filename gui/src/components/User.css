@@ -8,10 +8,37 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
+  padding:10px;
 }
 
 .username,.email{
   height: 1.5em;
   width: 12.5em;
   color:#F2E3DB;
+}
+
+#imgButtonAdd1,#imgButtonAdd2{
+  height:2.5em;
+  width:2.5em;
+}
+
+#imgButtonAdd2{
+  display:none;
+}
+
+#btnAddFriend{
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  position: relative;
+  left:8em;
+}
+
+#btnAddFriend:hover #imgButtonAdd2{
+  display:inline;
+}
+
+#btnAddFriend:hover #imgButtonAdd1{
+  display:none;
 }

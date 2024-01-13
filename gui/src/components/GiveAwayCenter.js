@@ -1,7 +1,7 @@
 import { Link} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Food from './Food'
-import User from'./User'
+import UserReq from'./UserFriendReq'
 import {useSelector, useDispatch} from 'react-redux'
 import './GiveAwayCenter.css'
 
@@ -69,7 +69,7 @@ function GiveAwayCenter(){
                     <p className='pageHeaderTitle' id='UsersListTitle'>
                             Users List
                             </p>
-                    {users.length > 0 && users?.map(e => <User key={e.id_food} item={e} />)}
+                    {users.length > 0 && users?.map(e => <UserReq key={e.id_food} item={e} />)}
                 </div>
             </div>
         </div>

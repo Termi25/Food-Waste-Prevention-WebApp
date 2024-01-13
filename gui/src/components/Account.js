@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import "./Account.css"
 import { useEffect, useState } from 'react'
 import Food from './Food'
+import User from './User'
 
 const SERVER = 'http://localhost:8080'
 const Account=(props)=>{
@@ -16,6 +17,8 @@ const Account=(props)=>{
     const [emailAdress,setEmailAdress]=useState("-")
     const [typeOfEater,setTypeOfEater]=useState("-")
     const [createdAt,setCreatedAt]=useState("-")
+
+    const [users,setUsers]=useState([])
 
     const [food,setFood]=useState([])
 
@@ -90,6 +93,16 @@ const Account=(props)=>{
         navigate('/');
     }
 
+    const getUsers = async () => {
+        try{
+            const response = await fetch(`${SERVER}/users/friends/${authId}`)
+            const data = await response.json()
+            setUsers(data)
+        }catch(err){
+            // alert('Dont forget to add the food in your fridge!')
+        }
+    }
+
     const getFood = async () => {
         try{
             const response = await fetch(`${SERVER}/foods/${authId}`)
@@ -124,6 +137,7 @@ const Account=(props)=>{
     useEffect(() => {
         try{
             getFood()
+            getUsers()
         }catch(err){
             // alert('Dont forget to add the food in your fridge!')
         }
@@ -139,7 +153,15 @@ const Account=(props)=>{
                         isLoggedIn
                     }}><p className='pageHeaderTitle' id='toCenter'>WasteNOT</p></Link>
                 <UserData />
-                <button id="btnLogOut" onClick={LogOut}>Log Out</button>
+                <div className='accountDetailsLower'>
+                    <button id="btnLogOut" onClick={LogOut}>Log Out</button>
+                    <div className='UserList'>
+                        <p className='pageHeaderTitle' id='UsersListTitle'>
+                                Friends List
+                                </p>
+                        {users.length > 0 && users?.map(e => <User key={e.id_food} item={e} />)}
+                    </div>
+                </div>
             </div>
             <div className='FoodList'>
                 <div className='titleNBtns'>
@@ -185,7 +207,7 @@ const Account=(props)=>{
                         <option value="Legume">Legume</option>
                         <option value="Mezeluri si carne">Mezeluri si carne</option>
                         <option value="Oua">Oua</option>
-                        <option value="Panificatie">Mezeluri si carne</option>
+                        <option value="Panificatie">Panificatie</option>
                         <option value="Produse congelate">Produse congelate</option>
                         <option value="Snacks">Snacks</option>
                     </select>
