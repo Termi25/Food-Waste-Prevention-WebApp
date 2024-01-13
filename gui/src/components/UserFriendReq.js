@@ -16,26 +16,9 @@ function UserReq (props) {
             },      
         })    
         if(response.status===201){
-            // response.json().then((user)=>{setID(user.id_user)})
             console.log('ok')    
         }    
     }
-
-    // async function setID(x){
-    //     friendID=x;
-    //     var user2={"user_id2":friendID}
-    //     console.log(user2)
-    //     const response2=await fetch(`${SERVER}/friendRelation/${authId}`, {
-    //             method: 'post',
-    //             headers: {
-    //               'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(user2)
-    //         })
-    //         if(response2.status===201){
-    //             console.log('ok')
-    //         }
-    // }
 
     return (
         <div className='user'>
