@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import "./Account.css"
 import { useEffect, useState } from 'react'
+import addNotification from 'react-push-notification';
 import Food from './Food'
 import User from './User'
+import "./Account.css"
 
 const SERVER = 'http://localhost:8080'
 const Account=(props)=>{
@@ -56,13 +57,9 @@ const Account=(props)=>{
                             // alert('Dont forget to add the food in your fridge!')
                         }
                     }  
-                }else{
-                    // alert('Succesful LogOff');
-                    // navigate('/');
                 }
             }
-
-            fetchUser();
+            fetchUser()
         });
 
         return (
@@ -124,6 +121,15 @@ const Account=(props)=>{
                 body: JSON.stringify(food_to_add)
             })
             if(response.status===201){
+                addNotification({
+                    title: "Succes!",
+                    subtitle: "Product was added",
+                    message: `Food was succesfully added`,
+                    theme: "white",
+                    duration: 6000,
+                    closeButton: "X",
+                    backgroundTop: "green", 
+                  })
                 getFood()
             }
             document.getElementById('boxFName').value = ''
@@ -145,7 +151,7 @@ const Account=(props)=>{
 
 
     return (
-        <div id="mainAccount">
+        <div id="mainAccount"> 
             <div className="accountDetails">
                 <Link to="/giveawaycenter"
                     state={{
@@ -159,7 +165,7 @@ const Account=(props)=>{
                         <p className='pageHeaderTitle' id='UsersListTitle'>
                                 Friends List
                                 </p>
-                        {users.length > 0 && users?.map(e => <User key={e.id_food} item={e} />)}
+                        {users.length > 0 && users?.map(e => <User key={e.id_food} item={e} />)}   
                     </div>
                 </div>
             </div>

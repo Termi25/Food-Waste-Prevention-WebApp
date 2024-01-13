@@ -1,8 +1,47 @@
+import addNotification from 'react-push-notification';
 import './Food.css'
 
 function Food (props) {
     const { item } = props
-    
+
+    const date2=new Date().toISOString().slice(0, 10)
+
+    var currDate=new Date(date2)
+    var foodDate=new Date(item.ExpirationDate)
+    if(currDate.getTime()===foodDate.getTime()){
+        // addNotification({
+        //     title: "Notify",
+        //     subtitle: "Product expiration date will soon be passed",
+        //     message: `${item.food_name} will expire today`,
+        //     theme: "white",
+        //     duration: 6000,
+        //     closeButton: "X",
+        //     backgroundTop: "red", 
+        //   })
+    }else{
+        if(currDate.getTime()>foodDate.getTime()){
+            addNotification({
+                title: "Alert",
+                subtitle: "Product expiration date passed",
+                message: `${item.food_name} has expired`,
+                theme: "dark",
+                duration: 6000,
+                closeButton: "X",
+                backgroundTop: "red", 
+              })
+        }else{
+            var zile=foodDate.getDate()-currDate.getDate()
+                addNotification({
+                    title: "Notify",
+                    message: `${item.food_name} will expire in ${zile} days`,
+                    theme: "white",
+                    duration: 6000,
+                    closeButton: "X",
+                    backgroundTop: "orange", 
+                  })
+        }
+    }
+
     function setCheck(){
         if(item.Claimable===false){
             return "Not visible for claim"
@@ -10,6 +49,7 @@ function Food (props) {
             return "Visible for claim"
         }
     }
+
     return (
     <div className='food-item'>
         <div className='food_name'>
@@ -20,7 +60,7 @@ function Food (props) {
             <label className="labelsFoodSection">TYPE :  </label>
             {item.FoodType}
         </div>
-        <div className='expiration_date'>
+        <div className='expiration_date' id='expiration'>
             <label className="labelsFoodSection">EXPIRATION DATE :  </label>
             {item.ExpirationDate}
         </div>
@@ -35,27 +75,3 @@ function Food (props) {
 }
 
 export default Food
-
-// id_food:{
-//     type: Sequelize.UUID,
-//     defaultValue:Sequelize.UUIDV4,
-//     primaryKey: true,
-// },
-// food_name: {
-//     type:Sequelize.STRING,
-//     allowNull: false,
-//     validate:{
-//         len:[3,200],
-//     },
-// },
-// ExpirationDate:{
-//     type:Sequelize.DATEONLY,
-//     allowNull:false,
-// },
-// FoodType:{
-//     type:Sequelize.STRING,
-//     allowNull:false,
-//     validate:{
-//         len:[3,200]
-//     },
-// },
