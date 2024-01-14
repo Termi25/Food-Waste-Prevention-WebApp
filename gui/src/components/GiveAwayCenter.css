@@ -10,7 +10,7 @@
 .Shortcuts{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
     width:100%;
     height:3vh;
 }
@@ -40,6 +40,11 @@
     margin-right:5px
 }
 
-#toAccount:hover{
-    color:#FFB000
+#toAccount,#toLogin{
+    margin-left:20px
+}
+
+#toCenter:hover,#toAccount:hover,#toLogin:hover {
+    color:#FFB000;
+    padding-left:1px
 }

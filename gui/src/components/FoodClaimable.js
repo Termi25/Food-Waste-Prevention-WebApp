@@ -1,12 +1,14 @@
 import addNotification from 'react-push-notification'
 import {useSelector, useDispatch} from 'react-redux'
 import './Food.css'
+import { useEffect, useState } from 'react'
 
 const SERVER = 'http://localhost:8080'
 function FoodClaimable (props) {
     const { item } = props
     const authId=useSelector((state)=>state.authId)
     const isLoggedIn=useSelector((state)=>state.isLoggedIn)
+    const [alreadyClaimmed,setAlreadyClaimed]=useState(false)
 
     function setCheck(){
         if(item.Claimable===false){
@@ -16,8 +18,33 @@ function FoodClaimable (props) {
         }
     }
 
+    async function checkClaimedByCurrUser(){
+        if(isLoggedIn!==false && alreadyClaimmed===false){
+            const response=await fetch(`${SERVER}/claimRequests/check/${authId}/${item.id_food}`, {
+                method: 'get',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+            if(response.status===201){
+                setAlreadyClaimed(true)
+            }  
+        }
+    }
+
+    useEffect(()=>{
+        try{
+            checkClaimedByCurrUser()
+            if(alreadyClaimmed===true){
+                console.log(`${item.food_name} already claimmed`)
+            }
+        }catch(err){
+
+        }
+    },[authId])
+
     async function addClaim(){
-        if(isLoggedIn!==false){
+        if(isLoggedIn!==false && alreadyClaimmed===false){
             const response=await fetch(`${SERVER}/claimRequest/${item.id_food}/${authId}`, {
                 method: 'post',
                 headers: {
@@ -28,6 +55,17 @@ function FoodClaimable (props) {
             if(response.status===201){
                 console.log('Claim added')
             }  
+        }else{
+            if(isLoggedIn!==false && alreadyClaimmed===true){
+                addNotification({
+                    title: "Notification",
+                    subtitle: "Claim request for this item is already sent",
+                    theme: "white",
+                    closeButton: "X",
+                    backgroundTop: "yellow", 
+                    colorTop:"black"
+                  })
+            }
         }
     }
 

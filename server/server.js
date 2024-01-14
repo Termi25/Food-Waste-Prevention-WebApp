@@ -221,6 +221,20 @@ app.get("/users/not/:id_user",async (req,res,next)=>{
   }
 });
 
+//SELECT all user From users by !id  -functional
+app.get("/users/not/global/:id_user",async (req,res,next)=>{
+  try{
+    let users=await User.findAll({ where: { id_user:{[Op.ne]:req.params.id_user}}})
+    if(users.length>0){
+      return res.status(201).json(users);
+    }else{
+      return res.status(401).json({message:"Invalid user identifier"});
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
 //SELECT all user From users by !id and friends -functional
 app.get("/users/friends/:id_user",async (req,res,next)=>{
   try{
@@ -534,7 +548,7 @@ app.get("/claimRequests/:id_user", async(req,res,next)=>{
     if(user){
       const claims=await user.getClaimRequests()
       if(claims.length >0){
-        res.json(claims)
+        res.status(201).json(claims)
       }else{
         res.sendStatus(204)
       }
@@ -546,7 +560,26 @@ app.get("/claimRequests/:id_user", async(req,res,next)=>{
   }
 });
 
-// SELECT all claims for user food
+// SELECT claim by current user for certain claimable food -functional
+app.get("/claimRequests/check/:id_user/:id_food", async(req,res,next)=>{
+  try{
+    const user=await User.findByPk(req.params.id_user)
+    if(user){
+      const claims=await ClaimRequest.findAll({where:{userIdUser:req.params.id_user, foodIdFood:req.params.id_food}})
+      if(claims.length >0){
+        res.status(201).json(claims)
+      }else{
+        res.sendStatus(204)
+      }
+    }else{
+      res.sendStatus(404)
+    }
+  }catch(err){
+    next(err)
+  }
+});
+
+// SELECT all claims for current user food
 app.get("/claimRequest/not/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
