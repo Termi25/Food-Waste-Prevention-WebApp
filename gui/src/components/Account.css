@@ -27,6 +27,19 @@
     margin-top:0px
 }
 
+.FriendList{
+    margin-left:5px;
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    width:fit-content;
+    height:fit-content;
+    background-color: #E86A33;
+    border-radius: 4px;
+    background-size: cover;
+    margin-right:5px
+}
+
 .divAccountDetail,.divFoodAdder,.accountDetailsLower{
     display: flex;
     justify-content:space-between;

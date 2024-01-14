@@ -542,7 +542,7 @@ app.delete('/friendRelation/:id_user/:user_id2', async(req,res,next)=>{
 //ClaimRequest Routers
 
 // SELECT all claims by current user -functional
-app.get("/claimRequests/:id_user", async(req,res,next)=>{
+app.get("/claimRequests/made/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
@@ -560,14 +560,46 @@ app.get("/claimRequests/:id_user", async(req,res,next)=>{
   }
 });
 
+// SELECT all claims for current user -functional
+app.get("/claimRequests/received/:id_user", async(req,res,next)=>{
+  try{
+    const user=await User.findByPk(req.params.id_user)
+    if(user){
+      const foods =await Food.findAll({ where: { userIdUser: user.id_user,Claimable:true}})
+      const claimsDetailed=[]
+      if(foods){
+        for(let i=0;i<foods.length;i++){
+          const query=await ClaimRequest.findAll({where:{foodIdFood:foods[i].id_food}})
+          claimsDetailed.push(query.shift())
+        }
+        if(claimsDetailed.length>0){
+          res.status(201).json(claimsDetailed)
+        }else{
+          res.sendStatus(204)
+        }
+      }
+    }else{
+      res.sendStatus(404)
+    }
+  }catch(err){
+    next(err)
+  }
+});
+
 // SELECT claim by current user for certain claimable food -functional
 app.get("/claimRequests/check/:id_user/:id_food", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
-      const claims=await ClaimRequest.findAll({where:{userIdUser:req.params.id_user, foodIdFood:req.params.id_food}})
+      const claims=await ClaimRequest.findAll({
+        where:{
+          userIdUser:req.params.id_user, 
+          foodIdFood:req.params.id_food,
+          status: ['pending', 'accepted']
+      }
+    })
       if(claims.length >0){
-        res.status(201).json(claims)
+        res.status(201).json(claims.shift())
       }else{
         res.sendStatus(204)
       }
@@ -579,7 +611,7 @@ app.get("/claimRequests/check/:id_user/:id_food", async(req,res,next)=>{
   }
 });
 
-// SELECT all claims for current user food
+// SELECT all claims for current user food -functional
 app.get("/claimRequest/not/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
@@ -600,6 +632,73 @@ app.get("/claimRequest/not/:id_user", async(req,res,next)=>{
     }else{
       res.sendStatus(404)
     }
+  }catch(err){
+    next(err)
+  }
+});
+
+// SELECT owner for current claimRequest - functional
+app.get("/claimRequest/:id_claim", async(req,res,next)=>{
+  try{
+    const claim=await ClaimRequest.findByPk(req.params.id_claim)
+    if(claim)
+    {
+      const user=await User.findAll({where:{id_user:claim.userIdUser}})
+      if(user){
+          res.status(201).json(user.shift())
+        }else{
+          res.sendStatus(204)
+      }
+    }else{
+        res.sendStatus(404)
+      }
+  }catch(err){
+    next(err)
+  }
+});
+
+// SELECT user for food in current claimRequest - functional
+app.get("/claimRequest/owner/:id_claim", async(req,res,next)=>{
+  try{
+    const claim=await ClaimRequest.findByPk(req.params.id_claim)
+    if(claim)
+    {
+        const food=await Food.findAll({where:{id_food:claim.foodIdFood}})
+        if(food){
+          const user=await User.findAll({where:{id_user:food[0].userIdUser}})
+          if(user){
+            res.status(201).json(user.shift())
+          }else{
+            res.sendStatus(204)
+          }
+        }
+        else{
+          res.sendStatus(404)
+        }
+    }else{
+        res.sendStatus(404)
+      }
+  }catch(err){
+    next(err)
+  }
+});
+
+// SELECT food for current claimRequest -functional
+app.get("/claimRequest/food/:id_claim", async(req,res,next)=>{
+  try{
+    const claim=await ClaimRequest.findByPk(req.params.id_claim)
+    if(claim)
+    {
+        const food=await Food.findAll({where:{id_food:claim.foodIdFood}})
+        if(food){
+          res.status(201).json(food.shift())
+        }
+        else{
+          res.sendStatus(204)
+        }
+    }else{
+        res.sendStatus(404)
+      }
   }catch(err){
     next(err)
   }
@@ -631,7 +730,16 @@ app.put('/claimRequest/:id_claim',async(req,res,next)=>{
     const claim=await ClaimRequest.findByPk(req.params.id_claim)
     if(claim)
     {
-      await claim.update(req.body)
+      if(req.body.status==='accepted'){
+        const food=await Food.findByPk(claim.foodIdFood)
+        food.userIdUser=claim.userIdUser
+        food.Claimable=false
+        console.log(food)
+        await food.save()
+        await claim.update(req.body)
+      }else{
+        await claim.update(req.body)
+      }
       res.sendStatus(204)
     }else{
       res.sendStatus(404)
