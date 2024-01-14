@@ -506,7 +506,7 @@ app.put('/friendRelation/:id_user1/:user_id2',async(req,res,next)=>{
 });
 
 // DELETE friendRelation between 2 users -functional
-app.delete('/:id_user/friendRelation/:user_id2', async(req,res,next)=>{
+app.delete('/friendRelation/:id_user/:user_id2', async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
@@ -528,7 +528,7 @@ app.delete('/:id_user/friendRelation/:user_id2', async(req,res,next)=>{
 //ClaimRequest Routers
 
 // SELECT all claims by current user -functional
-app.get("/:id_user/claimRequests", async(req,res,next)=>{
+app.get("/claimRequests/:id_user", async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){
@@ -546,28 +546,34 @@ app.get("/:id_user/claimRequests", async(req,res,next)=>{
   }
 });
 
-// // SELECT all claims for user food
-// app.get("/:id_user/claimRequest", async(req,res,next)=>{
-//   try{
-//     const user=await User.findByPk(req.params.id_user)
-//     if(user)
-//     {
-//       const claims =await user.claimRequests({ where: {id_user: req.params.id_user}})
-//       if(claims.length>0){
-//         res.json(claims)
-//       }else{
-//         res.sendStatus(204)
-//       }
-//     }else{
-//       res.sendStatus(404)
-//     }
-//   }catch(err){
-//     next(err)
-//   }
-// });
+// SELECT all claims for user food
+app.get("/claimRequest/not/:id_user", async(req,res,next)=>{
+  try{
+    const user=await User.findByPk(req.params.id_user)
+    if(user)
+    {
+      const food=await user.getFood()
+      if(food.length>0){
+        let claimsDetailed=[]
+        for(let i=0;i<food.length;i++){
+          let query=await ClaimRequest.findAll({where:{foodIdFood: food[i].id_food}})
+          claimsDetailed.push(query)
+        }
+        res.status(201).json(claimsDetailed)
+      }
+      else{
+        res.sendStatus(204)
+      }
+    }else{
+      res.sendStatus(404)
+    }
+  }catch(err){
+    next(err)
+  }
+});
 
 // INSERT claim on certain food by certain user -functional
-app.post("/:id_user/:id_food/claimRequest",async(req,res,next)=>{
+app.post("/claimRequest/:id_food/:id_user",async(req,res,next)=>{
   try{
     const user =await User.findByPk(req.params.id_user)
     const food =await Food.findByPk(req.params.id_food)
@@ -587,7 +593,7 @@ app.post("/:id_user/:id_food/claimRequest",async(req,res,next)=>{
 });
 
 // UPDATE claim -functional
-app.put('/:id_claim/claimRequest',async(req,res,next)=>{
+app.put('/claimRequest/:id_claim',async(req,res,next)=>{
   try{
     const claim=await ClaimRequest.findByPk(req.params.id_claim)
     if(claim)
@@ -603,7 +609,7 @@ app.put('/:id_claim/claimRequest',async(req,res,next)=>{
 });
 
 // DELETE claim
-app.delete('/:id_claim/claimRequest', async(req,res,next)=>{
+app.delete('/claimRequest/:id_claim', async(req,res,next)=>{
   try{
     const claim=await ClaimRequest.findByPk(req.params.id_claim)
     if(claim){

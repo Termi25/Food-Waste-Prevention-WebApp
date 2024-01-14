@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react'
-import addNotification from 'react-push-notification';
+import addNotification from 'react-push-notification'
 import Food from './Food'
 import User from './User'
 import "./Account.css"
@@ -153,11 +153,9 @@ const Account=(props)=>{
     return (
         <div id="mainAccount"> 
             <div className="accountDetails">
-                <Link to="/giveawaycenter"
-                    state={{
-                        authId,
-                        isLoggedIn
-                    }}><p className='pageHeaderTitle' id='toCenter'>WasteNOT</p></Link>
+                <Link to="/giveawaycenter">
+                    <p className='pageHeaderTitle' id='toCenter'>WasteNOT</p>
+                    </Link>
                 <UserData />
                 <div className='accountDetailsLower'>
                     <button id="btnLogOut" onClick={LogOut}>Log Out</button>
