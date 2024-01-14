@@ -5,6 +5,7 @@ import addNotification from 'react-push-notification'
 import Food from './Food'
 import User from './User'
 import ClaimRequestReceive from './ClaimRequestReceive'
+import ClaimRequestSent from './ClaimRequestSent'
 import "./Account.css"
 
 const SERVER = 'http://localhost:8080'
@@ -30,6 +31,7 @@ const Account=(props)=>{
     const [claimable,setClaimable]=useState(false)
 
     const [claimReq,setClaimReq]=useState("")
+    const [claimReqOwned,setClaimReqOwned]=useState("")
 
     const navigate=useNavigate()
     const dispatch=useDispatch()
@@ -143,7 +145,7 @@ const Account=(props)=>{
         }
     }
 
-    const getClaimReq = async () => {
+    const getClaimReqRecieved = async () => {
         try{
             const response = await fetch(`${SERVER}/claimRequests/received/${authId}`)
             const data = await response.json()
@@ -153,11 +155,22 @@ const Account=(props)=>{
         }
     }
 
+    const getClaimReqSent = async () => {
+        try{
+            const response = await fetch(`${SERVER}/claimRequests/made/${authId}`)
+            const data = await response.json()
+            setClaimReqOwned(data)
+        }catch(err){
+            // alert('Dont forget to add the food in your fridge!')
+        }
+    }
+
     useEffect(() => {
         try{
             getFood()
             getUsers()
-            getClaimReq()
+            getClaimReqRecieved()
+            getClaimReqSent()
         }catch(err){
             // alert('Dont forget to add the food in your fridge!')
         }
@@ -249,6 +262,15 @@ const Account=(props)=>{
                     <div className='FoodList'>
                         {claimReq.length > 0 && claimReq?.map(e => <ClaimRequestReceive key={e.id_claim} item={e} />)}
                         {claimReq.length === 0 ?(<p>No claim request received</p>):(<div/>)}
+                    </div>
+                </div>
+                <div className='ClaimReqList'>
+                    <div className='titleNBtns'>
+                        <p className='pageHeaderTitle'>Claim Requests for my food</p>
+                    </div>
+                    <div className='FoodList'>
+                        {claimReqOwned.length > 0 && claimReqOwned?.map(e => <ClaimRequestSent key={e.id_claim} item={e} />)}
+                        {claimReqOwned.length === 0 ?(<p>No claim request received</p>):(<div/>)}
                     </div>
                 </div>
             </div>

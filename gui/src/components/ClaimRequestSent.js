@@ -8,7 +8,7 @@ import './ClaimRequest.css'
 
 const SERVER = 'http://localhost:8080'
 
-function ClaimRequestReceive (props) {
+function ClaimRequestSent (props) {
   const { item } = props
   const authId=useSelector((state)=>state.authId)
   const [food,setFood]=useState("")
@@ -43,29 +43,6 @@ function ClaimRequestReceive (props) {
         }
     },[authId])
 
-    async function updateClaim(){
-        const response=await fetch(`${SERVER}/claimRequest/${item.id_claim}`, {
-            method: 'put',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        })
-        if(response.status===201){
-            console.log('accepted claim req')
-        }
-    }
-
-    function btnAcceptClaimReq(){
-        item.status='accepted'
-        updateClaim()
-    }
-
-    function btnRejectClaimReq(){
-        item.status='rejected'
-        updateClaim()
-    }
-
   return (
     <div className='request'>
         <div>
@@ -82,16 +59,9 @@ function ClaimRequestReceive (props) {
         </div>
         <div className='status'>
             Status: {item.status}
-        </div>
-        {item.status!=='accepted' ?(
-        <div>
-            <button onClick={btnAcceptClaimReq}>Accept</button>
-            <button onClick={btnRejectClaimReq}>Reject</button>
-        </div>
-        ):(<div/>)}
-        
+        </div>    
     </div>
   )
 }
 
-export default ClaimRequestReceive
+export default ClaimRequestSent
