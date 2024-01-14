@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './User.css'
 import {useSelector} from 'react-redux'
 
@@ -5,7 +6,7 @@ const SERVER = 'http://localhost:8080'
 function UserReq (props) {
     const { item } = props
     const authId=useSelector((state)=>state.authId)
-    var friendID;
+    const [btnPressed,setBtnPressed]=useState(false)
     
     async function addFriend(){
         const email=item.emailAdress;
@@ -16,7 +17,7 @@ function UserReq (props) {
             },      
         })    
         if(response.status===201){
-            console.log('ok')    
+            setBtnPressed(true)   
         }    
     }
 
@@ -28,10 +29,15 @@ function UserReq (props) {
         <div className='email'>
             {item.typeOfEater}
         </div>
+            {btnPressed ===false ?(
             <button id='btnAddFriend' onClick={addFriend}>
                 <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
                 <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
             </button>
+            ):(
+            <div/
+            >)}
+            
         </div>
     )
 }
