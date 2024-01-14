@@ -1,5 +1,6 @@
 import addNotification from 'react-push-notification';
 import './Food.css'
+import { useState } from 'react';
 
 function Food (props) {
     const { item } = props
@@ -8,6 +9,7 @@ function Food (props) {
 
     var currDate=new Date(date2)
     var foodDate=new Date(item.ExpirationDate)
+
     if(currDate.getTime()===foodDate.getTime()){
         // addNotification({
         //     title: "Notify",
@@ -25,7 +27,6 @@ function Food (props) {
                 subtitle: "Product expiration date passed",
                 message: `${item.food_name} has expired`,
                 theme: "dark",
-                duration: 6000,
                 closeButton: "X",
                 backgroundTop: "red", 
               })
@@ -35,7 +36,6 @@ function Food (props) {
                     title: "Notify",
                     message: `${item.food_name} will expire in ${zile} days`,
                     theme: "white",
-                    duration: 6000,
                     closeButton: "X",
                     backgroundTop: "orange", 
                   })
@@ -68,8 +68,6 @@ function Food (props) {
             <label className="labelsFoodSection">VISIBILITY :  </label>
             {setCheck()}
         </div>
-        {/* <button className='btnGeneral'>Remove</button>
-        <button className='btnGeneral'>Mark to give away</button> */}
     </div>
     )
 }

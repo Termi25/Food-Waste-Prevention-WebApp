@@ -164,6 +164,7 @@ const Account=(props)=>{
                                 Friends List
                                 </p>
                         {users.length > 0 && users?.map(e => <User key={e.id_food} item={e} />)}   
+                        {users.length ===0 ?(<p>No friends added</p>):(<div/>)}
                     </div>
                 </div>
             </div>
@@ -173,6 +174,7 @@ const Account=(props)=>{
                 </div>
                 <div className='FoodList'>
                     {food.length > 0 && food?.map(e => <Food key={e.id_food} item={e} />)}
+                    {food.length ===0 ?(<p>No food added</p>):(<div/>)}
                 </div>
             </div>
             <div className='FoodAdder'>

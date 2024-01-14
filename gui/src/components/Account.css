@@ -22,6 +22,11 @@
     border-radius: 2%;
 }
 
+.FoodAdder{
+    margin:5px;
+    margin-top:0px
+}
+
 .divAccountDetail,.divFoodAdder,.accountDetailsLower{
     display: flex;
     justify-content:space-between;
