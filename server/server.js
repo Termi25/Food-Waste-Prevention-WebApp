@@ -486,10 +486,14 @@ app.post("/friendRelation/:id_user1/:email",async(req,res,next)=>{
     const user =await User.findByPk(req.params.id_user1)
     const friendtoAdd=await User.findAll({where:{emailAdress:req.params.email}})
     if(user){
-      const friend=await FriendRelation.create({user_id2:friendtoAdd[0].id_user})
-      user.addFriendRelation(friend)
-      await user.save()
-      res.status(201).location(friend.id_friendRel).send()
+      const friend1=await FriendRelation.create({user_id2:friendtoAdd[0].id_user,userIdUser:user.id_user})
+      const friend2=await FriendRelation.create({user_id2:user.id_user,userIdUser:friendtoAdd[0].id_user})
+      await User.bulkCreate([friend1,friend2])
+      // user.addFriendRelation(friend1)
+      // friendtoAdd.addFriendRelation(friend2)
+      // await user.save()
+      // await friendtoAdd[0].save()
+      res.status(204)
     }else{
       res.sendStatus(404)
     }

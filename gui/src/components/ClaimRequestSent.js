@@ -16,7 +16,7 @@ function ClaimRequestSent (props) {
 
     const getOwner = async () => {
         try{
-            const response = await fetch(`${SERVER}/claimRequest/${item.id_claim}`)
+            const response = await fetch(`${SERVER}/claimRequest/owner/${item.id_claim}`)
             const data = await response.json()
             setFoodOwner(data)
         }catch(err){
@@ -55,7 +55,7 @@ function ClaimRequestSent (props) {
             Expiration date: {food.ExpirationDate}
         </div>
         <div>
-            User requesting claim: {foodOwner.username}
+            Owner of food: {foodOwner.username}
         </div>
         <div className='status'>
             Status: {item.status}
