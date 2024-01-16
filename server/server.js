@@ -494,7 +494,7 @@ app.post("/friendRelation/:id_user1/:email",async(req,res,next)=>{
       // friendtoAdd.addFriendRelation(friend2)
       // await user.save()
       // await friendtoAdd[0].save()
-      res.status(204)
+      res.sendStatus(204)
     }else{
       res.sendStatus(404)
     }

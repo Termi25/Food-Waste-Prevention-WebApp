@@ -30,10 +30,10 @@ function UserReq (props) {
             {item.typeOfEater}
         </div>
             {btnPressed ===false ?(
-            <button id='btnAddFriend' onClick={addFriend}>
-                <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
-                <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
-            </button>
+                <button id='btnAddFriend' onClick={addFriend}>
+                    <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
+                    <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
+                </button>
             ):(
             <div/
             >)}
