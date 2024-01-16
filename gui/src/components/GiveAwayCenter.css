@@ -5,11 +5,9 @@
     height:100vh;
     align-items: left;
     justify-content: left;
-    background-image: url('../images/monika-grabkowska-P1aohbiT-EY-unsplash.png');
+    background-image: url('../images/olenka-kotyk-9x-PwjxC0Z8-unsplash.png');
     background-repeat: no-repeat;
-    background-size:contain;
-    background-position-x: 55vw;
-    background-position-y: 5vh;
+    background-size:cover;
 }
 
 .Shortcuts{
