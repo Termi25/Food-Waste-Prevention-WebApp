@@ -1,3 +1,4 @@
+import addNotification from "react-push-notification";
 import "./Register.css";
 import RegisterForm from "./RegisterForm"
 import { useNavigate } from "react-router-dom";
@@ -16,11 +17,25 @@ function Register(props) {
         body: JSON.stringify(user)
         })
         if(response.status===201){
-            alert('User succesfully registered')
+            addNotification({
+                title: "Notify",
+                subtitle: "Registration successful",
+                message: `Account registration successful! Please login in.`,
+                theme: "dark",
+                closeButton: "X",
+                backgroundTop: "green", 
+              })
             navigate('/')
         }
         else{
-            alert('User registration failed. Please try again!')
+            addNotification({
+                title: "Notify",
+                subtitle: "Registration failed",
+                message: `Account registration failed. Please try again!`,
+                theme: "dark",
+                closeButton: "X",
+                backgroundTop: "red", 
+              })
         }
     }
 

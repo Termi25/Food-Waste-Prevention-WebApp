@@ -605,7 +605,7 @@ app.get("/claimRequests/check/:id_user/:id_food", async(req,res,next)=>{
         where:{
           userIdUser:req.params.id_user, 
           foodIdFood:req.params.id_food,
-          status: ['pending', 'accepted']
+          status: ['pending']
       }
     })
       if(claims.length >0){

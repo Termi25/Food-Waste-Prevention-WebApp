@@ -13,7 +13,6 @@ function RegisterForm(props) {
 
   const registerUser = (evt) => {
     console.warn("Verify User called");
-    console.log(typeOfEater)
     onAdd({
         username,
         emailAdress,
@@ -29,46 +28,34 @@ function RegisterForm(props) {
   return (
     <div className="userREG-form">
         <p id="p">Register for WasteNOT</p>
-        <div className="username">
         <input
-          id="boxName"
-          type="text"
-          placeholder="Username"
-          onChange={(evt) => setUsername(evt.target.value)}
-          required
-        />
-      </div>
-      <div className="email">
+            id="boxName"
+            type="text"
+            placeholder="Username"
+            onChange={(evt) => setUsername(evt.target.value)}
+            required
+          />
         <input
-          id="boxEmail"
-          type="email"
-          placeholder="Email"
-          onChange={(evt) => setEmailAdress(evt.target.value)}
-          required
-        />
-      </div>
-      <div className="password">
+            id="boxEmail"
+            type="email"
+            placeholder="Email"
+            onChange={(evt) => setEmailAdress(evt.target.value)}
+            required
+          />
         <input
-          id="boxPass"
-          type="text"
-          placeholder="Password"
-          onChange={(evt) => setPassword(evt.target.value)}
-          required
-        />
-      </div>
-      <div className="typeEater">
+            id="boxPass"
+            type="text"
+            placeholder="Password"
+            onChange={(evt) => setPassword(evt.target.value)}
+            required
+          />
         <select id="boxType" name="type" size="1" required onChange={(evt) => setTypeOfEater(evt.target.value)}>
-            <option value="mixed">Mixed</option>
-            <option value="carnivorous">Carnivorous</option>
-            <option value="vegetarian">Vegetarian</option>
-        </select>
-      </div>
-      <div className="addREG">
+              <option value="mixed">Mixed</option>
+              <option value="carnivorous">Carnivorous</option>
+              <option value="vegetarian">Vegetarian</option>
+          </select>
         <input id="btnAddREG" type="button" value="Register" onClick={registerUser} />
-      </div>
-      <div className="add">
         <input id="btnBack" type="button" value="Go back" onClick={loginRedirect} />
-      </div>
     </div>
   );
 }

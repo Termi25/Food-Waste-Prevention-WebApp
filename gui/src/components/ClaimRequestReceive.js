@@ -10,6 +10,7 @@ function ClaimRequestReceive (props) {
   const authId=useSelector((state)=>state.authId)
   const [food,setFood]=useState("")
   const [foodOwner,setFoodOwner]=useState("")
+  const [responded,setResponded]=useState(false)
 
     const getOwner = async () => {
         try{
@@ -55,11 +56,13 @@ function ClaimRequestReceive (props) {
 
     function btnAcceptClaimReq(){
         item.status='accepted'
+        setResponded(true)
         updateClaim()
     }
 
     function btnRejectClaimReq(){
         item.status='rejected'
+        setResponded(true)
         updateClaim()
     }
 
@@ -80,7 +83,7 @@ function ClaimRequestReceive (props) {
         <div className='ClaimReqField' id='status'>
             Status : {item.status}
         </div>
-        {item.status==='pending' ?(
+        {responded===false ?(
             <div className='ClaimReqBtns'>
                 <button id="btnAcceptReq" className='btnClaimReq' onClick={btnAcceptClaimReq}>Accept</button>
                 <button id="btnRejectReq" className='btnClaimReq' onClick={btnRejectClaimReq}>Reject</button>

@@ -4,6 +4,7 @@ import {  useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import "./Login.css"
 import UserForm from './UserForm'
+import addNotification from 'react-push-notification'
 
 const SERVER = 'http://localhost:8080'
 
@@ -25,11 +26,25 @@ function Login (props) {
         },
         body: JSON.stringify(user)
       })
-      if(response.status!==401){
+      if(response.status===201){
         response.json().then((user)=>dispatch({type:'update',user_id:user.id_user}))
+        addNotification({
+          title: "Notify",
+          subtitle: "Log in successful",
+          theme: "dark",
+          closeButton: "X",
+          backgroundTop: "green", 
+        })
         navigate('/account');
       }else{
-        alert('There is no such account. Please register!')
+        addNotification({
+          title: "Notify",
+          subtitle: "Registration failed",
+          message: `Account log in failed. Please try again or register!`,
+          theme: "dark",
+          closeButton: "X",
+          backgroundTop: "red", 
+        })
       }
     }
   

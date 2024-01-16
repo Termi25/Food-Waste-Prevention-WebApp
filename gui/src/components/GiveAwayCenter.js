@@ -90,6 +90,7 @@ function GiveAwayCenter(){
                             Claimable Food
                             </p>
                         {food.length > 0 && food?.map(e => <FoodClaimable key={e.id_food} item={e} />)}
+                        {food.length ===0 ?(<p>No food that can be claimed.</p>):(<div/>)}
                 </div>
                 <div className='UserList'>
                     <p className='pageHeaderTitle' id='UsersListTitle'>
