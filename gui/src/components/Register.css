@@ -1,0 +1,70 @@
+.user-form {
+    height: 140px;
+    width: 200px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding: 10px;
+  }
+  
+  .user-form .email {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .username {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-form .password {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .passwordC {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-form .add {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #boxEmail,#boxPass,#btnAdd,#boxName,#boxPassC{
+    font-size: 18px;
+    border:none;
+    border-bottom:2px solid black;
+    background-color: white;
+  }
+  
+  #btnAdd,#btnAdd:hover{
+    background-color:#004225;
+    color:white;
+    border-radius: 10%;
+    width: 100px;
+    height:40px;
+    transition: 0.3s;
+  }
+  #btnAdd:hover{
+    background-color:#FFB000;
+  }
+  

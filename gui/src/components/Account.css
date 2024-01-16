@@ -1,0 +1,181 @@
+#mainAccount{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: left;
+    height:100%;
+    width:100%;
+    margin-left:5px;
+    background-image:url('../images/olenka-kotyk-iRguZkRTQyA-unsplash.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 6vw;
+    background-position-y: 6vw;
+}
+
+#linkBar{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:40vw;
+    height:fit-content
+}
+
+#shareSection{
+    display: flex;
+}
+
+#imgButtonShare{
+    height:2em;
+    width:2em;
+    margin-left:10px
+}
+
+.divAccount,.FoodAdder{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items:left;
+    padding:10px;
+    width:40vw;
+    height:20vh;
+    margin:5px;
+    margin-top:15px;
+    background-color: #E86A33;
+    border-radius: 2%;
+}
+
+.FoodAdder{
+    margin-top:0px;
+}
+
+.FriendList{
+    margin-left:5px;
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    width:fit-content;
+    height:fit-content;
+    background-color: #E86A33;
+    border-radius: 4px;
+    background-size: cover;
+    margin-right:5px
+}
+
+.divAccountDetail,.divFoodAdder,.accountDetailsLower{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    height:5vh;
+    width:fit-content;
+}
+
+.accountDetailsLower{
+    align-items: baseline;
+    justify-content: space-between;
+    width: 41.5vw;
+    height:fit-content;
+}
+
+.divFoodAdder{
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: left;
+    width:10vw;
+    height:6vh;
+}
+
+#boxFName,#boxExpiration,#boxFType,#boxClaim{
+    width:10vw;
+    height:2vh;
+}
+
+.pageHeaderTitle{
+    color:#F2E3DB;
+    text-decoration:underline;
+    transition: 0.5s;
+    margin-left:5px;
+    background-color: rgba(25, 25, 25, 0.3);
+    border-radius: 4px;
+    padding:5px
+}
+
+#toCenter:hover{
+    color:#FFB000
+}
+
+.Adder_w_Notify{
+    display:flex;
+    height: fit-content;
+}
+
+.FoodList,.FoodAdder{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    width:fit-content;
+    height:fit-content;
+    background-color: #E86A33;
+    border-radius: 4px;
+    background-size: cover;
+    margin-right:5px
+}
+
+.titleNBtns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:5px;
+    height: fit-content;
+}
+
+.btnPrimary,#btnLogOut,#btnNotification{
+    font-family: Comfortaa;
+    font-weight: bold;
+    font-size: large;
+    background-color: #41644A ;
+    color:#F2E3DB;
+    transition:0.3s;
+    border:none;
+    border-radius:4px;
+    padding:10px;
+}
+
+#btnLogOut,#btnNotification{
+    margin-left:5px;
+    flex-grow: 0.1;
+}
+
+#btnNotification{
+    margin-right:5px
+}
+
+.btnPrimary:hover,#btnLogOut:hover,#btnNotification:hover{
+    background-color:#FFB000;
+}
+
+.field{
+    font-family: Comfortaa;
+    font-size:medium;
+    width:25vw;
+    height:2vh;
+    margin-left:10px;
+    color:#F2E3DB;
+    background-color: #E86A33;
+    border:none;
+}
+
+.labelsAccountSection{
+    font-weight: bold;
+}
+
+.ClaimReqList{
+    width:16vw;
+}
+
+.ClaimList{
+    background-color: #E86A33;
+    padding:10px;
+    border-radius: 4px;
+    width:fit-content
+}

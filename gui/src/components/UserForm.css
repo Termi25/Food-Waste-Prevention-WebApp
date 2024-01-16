@@ -1,8 +1,7 @@
 .user-form {
-  height: 200px;
+  height: 140px;
   width: 200px;
-  background-color: gainsboro;
-  margin: 10px;
+  margin: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,24 +9,16 @@
   padding: 10px;
 }
 
-.user-form .username {
-  height: 60px;
+.user-form .email {
+  height: 30px;
   width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.user-form .fullName {
-  height: 60px;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-form .type {
-  height: 40px;
+.user-form .password {
+  height: 30px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -35,9 +26,28 @@
 }
 
 .user-form .add {
-  height: 40px;
+  height: 30px;
   width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#boxEmail,#boxPass,#btnAdd{
+  font-size: 18px;
+  border:none;
+  border-bottom:2px solid black;
+  background-color: white;
+}
+
+#btnAdd,#btnAdd:hover{
+  background-color:#004225;
+  color:white;
+  border-radius: 10%;
+  width: 100px;
+  height:40px;
+  transition: 0.3s;
+}
+#btnAdd:hover{
+  background-color:#FFB000;
 }

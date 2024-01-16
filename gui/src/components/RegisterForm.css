@@ -1,0 +1,101 @@
+.userREG-form {
+    height: 350px;
+    width: 350px;
+    margin: 5px;
+    display: flex;
+    background-color: #004225;
+    filter: drop-shadow(5px 5px 0px #FF9F29);
+    border-radius: 5%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap:15px;
+  }
+
+  #p{
+    text-align: center;
+    color:white;
+  }
+
+  .user-form .email {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .username {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-form .password {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .passwordC {
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .typeEater {
+    height: 50px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .addREG {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-form .add {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #boxEmail,#boxPass,#btnAddREG,#btnBack,#boxName,#boxPassC,#boxType{
+    font-size: 18px;
+    border:none;
+    border-bottom:2px solid black;
+    background-color: white;
+    padding:5px;
+    border-radius: 4px;
+  }
+
+  #boxType{
+    width:230px;
+  }
+  
+  #btnAddREG,#btnBack,#btnAddREG:hover,#btnBack:hover{
+    background-color:#191919;
+    color:white;
+    border-radius: 10%;
+    width: 100px;
+    height:40px;
+    transition: 0.3s;
+  }
+  #btnAddREG:hover,#btnBack:hover{
+    background-color:#FFB000;
+  }
+  

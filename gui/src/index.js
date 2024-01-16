@@ -1,11 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./components/App";
+import App from "./App";
+import { Provider } from "react-redux";
+import addNotification from 'react-push-notification';
+import { Notifications } from 'react-push-notification';
+import store from "./store/store.js";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <Provider store={store}>
+        <Notifications position="bottom-right"/>
+        <App />
+    </Provider>
 );

@@ -1,20 +1,18 @@
-import "./User.css";
-import RegularUser from "./RegularUser";
-import PowerUser from "./PowerUser";
+import './User.css'
 
-function User(props) {
-  const { item } = props; // object destructuring for accessing the data sent by the "UserList" parent component
+function User (props) {
+  const { item } = props
 
-  //pass data to RegularUser/PowerUser component through props (named "item" in this case)
   return (
-    <div className="user">
-      {item.type === "regular-user" ? (
-        <RegularUser item={item} />
-      ) : (
-        <PowerUser item={item} />
-      )}
-    </div>
-  );
+      <div className='user'>
+        <div className='username'>
+          {item.username}
+        </div>
+        <div className='email'>
+          {item.emailAdress}
+        </div>
+      </div>
+  )
 }
 
-export default User;
+export default User
