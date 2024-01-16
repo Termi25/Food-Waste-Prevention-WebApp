@@ -239,7 +239,7 @@ const Account=(props)=>{
                 <div id="linkBar">
                     <p className='pageHeaderTitle' id='toCenter'>WasteNOT</p>
                     <Link to="/giveawaycenter">
-                        <p className='pageHeaderTitle' id='toCenter'>Giveaway Center</p>
+                        <p className='pageHeaderTitle' id='toGAC'>Giveaway Center</p>
                         </Link>
                 </div>
                 <UserData />

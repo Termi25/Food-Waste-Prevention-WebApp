@@ -110,5 +110,5 @@ function GiveAwayCenter(){
         </div>
     );
 }
-
+/* <img id='imgBackgroundGAC' src={require('../images/monika-grabkowska-P1aohbiT-EY-unsplash.png')}/> */
 export default GiveAwayCenter;
