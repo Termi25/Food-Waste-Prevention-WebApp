@@ -2,10 +2,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react'
 import addNotification from 'react-push-notification'
-import Food from './Food'
-import User from './User'
+import {FacebookShareButton}from 'react-share'
 import ClaimRequestReceive from './ClaimRequestReceive'
 import ClaimRequestSent from './ClaimRequestSent'
+import Food from './Food'
+import User from './User'
 import "./Account.css"
 
 const SERVER = 'http://localhost:8080'
@@ -69,7 +70,12 @@ const Account=(props)=>{
 
         return (
         <div className='divAccount'>
-            <p className='pageHeaderTitle'>Account Details</p>
+            <div id='shareSection'>
+                <p className='pageHeaderTitle'>Account Details</p>
+                <FacebookShareButton url={"https://github.com/Termi25/TW-Project"}>
+                    <img id='imgButtonShare' src={require('../images/facebook.png')}/>
+                </FacebookShareButton>
+            </div>
             <div className='divAccountDetail'>
                 <label className="labelsAccountSection">USERNAME </label>
                 <input id="usernameAccount" type="text" className='field' defaultValue={username} readOnly/>
@@ -329,6 +335,8 @@ const Account=(props)=>{
                         {(claimReqOwned.length === 0 || claimReqOwned[0]===null)  ?(<p>No claim request received</p>):(<div/>)}
                     </div>
                 </div>
+                <a href="https://www.flaticon.com/free-icons/facebook" title="facebook icons" target="_blank">Resource 1</a>
+                <a href="https://www.flaticon.com/free-icons/add" title="add icons" target="_blank">Resource 2</a>
             </div>
         </div>
     );

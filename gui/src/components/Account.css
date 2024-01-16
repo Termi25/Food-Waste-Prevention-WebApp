@@ -16,6 +16,16 @@
     height:fit-content
 }
 
+#shareSection{
+    display: flex;
+}
+
+#imgButtonShare{
+    height:2em;
+    width:2em;
+    margin-left:10px
+}
+
 .divAccount,.FoodAdder{
     display: flex;
     flex-direction: column;
