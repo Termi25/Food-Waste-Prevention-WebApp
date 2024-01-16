@@ -145,7 +145,7 @@ const Account=(props)=>{
         }
     }
 
-    const getClaimReqRecieved = async () => {
+    const getClaimReqReceived = async () => {
         try{
             const response = await fetch(`${SERVER}/claimRequests/received/${authId}`)
             const data = await response.json()
@@ -210,7 +210,7 @@ const Account=(props)=>{
         try{
             getFood()
             getUsers()
-            getClaimReqRecieved()
+            getClaimReqReceived()
             getClaimReqSent()
         }catch(err){
             // alert('Dont forget to add the food in your fridge!')
@@ -270,7 +270,7 @@ const Account=(props)=>{
                     </div>
                     <div className="divFoodAdder">
                         <label className="labelsFoodAdderSection">Food Type</label>
-                        <select id="bboxFType" name="type" size="1" required onChange={(evt) => setFoodType(evt.target.value)}>
+                        <select id="boxFType" name="type" size="1" required onChange={(evt) => setFoodType(evt.target.value)}>
                             <option value="Bauturi alcoolice">Bauturi alcoolice</option>
                             <option value="Bauturi non-alcoolice">Bauturi non-alcoolice</option>
                             <option value="Cafea">Cafea</option>
