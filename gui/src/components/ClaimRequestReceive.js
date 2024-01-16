@@ -1,9 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react'
 import addNotification from 'react-push-notification'
-import Food from './Food'
-import User from './User'
 import './ClaimRequest.css'
 
 const SERVER = 'http://localhost:8080'
@@ -68,25 +65,25 @@ function ClaimRequestReceive (props) {
 
   return (
     <div className='request'>
-        <div>
-            Food name: {food.food_name}
+        <div className='ClaimReqField'>
+            Food name : {food.food_name}
+        </div>
+        <div className='ClaimReqField'>
+            Food type : {food.FoodType}
+        </div>
+        <div className='ClaimReqField'>
+            Expiration date : {food.ExpirationDate}
         </div>
         <div>
-            Food type: {food.FoodType}
+            {foodOwner.id_user!==authId ?(<div className='ClaimReqField'>User requesting claim    : {foodOwner.username}</div>):(<div/>)}
         </div>
-        <div>
-            Expiration date: {food.ExpirationDate}
-        </div>
-        <div>
-            {foodOwner.id_user!==authId ?(<div>User requesting claim: {foodOwner.username}</div>):(<div/>)}
-        </div>
-        <div className='status'>
-            Status: {item.status}
+        <div className='ClaimReqField' id='status'>
+            Status : {item.status}
         </div>
         {item.status==='pending' ?(
-            <div>
-                <button onClick={btnAcceptClaimReq}>Accept</button>
-                <button onClick={btnRejectClaimReq}>Reject</button>
+            <div className='ClaimReqBtns'>
+                <button id="btnAcceptReq" className='btnClaimReq' onClick={btnAcceptClaimReq}>Accept</button>
+                <button id="btnRejectReq" className='btnClaimReq' onClick={btnRejectClaimReq}>Reject</button>
             </div>
         ):(<div/>)}
         

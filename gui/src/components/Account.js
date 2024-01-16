@@ -258,61 +258,64 @@ const Account=(props)=>{
                 </div>
             </div>
             <div className='Adder_n_ClaimReq'>
-                <div className='FoodAdder'>
-                    <p className='pageHeaderTitle'>FOOD Adder</p>
-                    <div className="divFoodAdder">
-                        <label className="labelsFoodAdderSection">Food Name</label>
-                        <input
-                        id="boxFName"
-                        type="text"
-                        placeholder="Food Name"
-                        onChange={(evt) => setFoodName(evt.target.value)}
-                        required
-                        />
+                <div className='Adder_w_Notify'>
+                    <div className='FoodAdder'>
+                        <p className='pageHeaderTitle'>FOOD Adder</p>
+                        <div className="divFoodAdder">
+                            <label className="labelsFoodAdderSection">Food Name</label>
+                            <input
+                            id="boxFName"
+                            type="text"
+                            placeholder="Food Name"
+                            onChange={(evt) => setFoodName(evt.target.value)}
+                            required
+                            />
+                        </div>
+                        <div className="divFoodAdder">
+                            <label className="labelsFoodAdderSection">Expiration Date</label>
+                            <input
+                            id="boxExpiration"
+                            type="date"
+                            onChange={(evt) => setExpiration(evt.target.value)}
+                            required
+                            />
+                        </div>
+                        <div className="divFoodAdder">
+                            <label className="labelsFoodAdderSection">Food Type</label>
+                            <select id="boxFType" name="type" size="1" required onChange={(evt) => setFoodType(evt.target.value)}>
+                                <option value="Bauturi alcoolice">Bauturi alcoolice</option>
+                                <option value="Bauturi non-alcoolice">Bauturi non-alcoolice</option>
+                                <option value="Cafea">Cafea</option>
+                                <option value="Cereale">Cereale</option>
+                                <option value="Conserve">Conserve</option>
+                                <option value="Dulciuri">Dulciuri</option>
+                                <option value="Fructe">Fructe</option>
+                                <option value="Ingrediente culinare">Ingrediente culinare</option>
+                                <option value="Lactate">Lactate</option>
+                                <option value="Legume">Legume</option>
+                                <option value="Mezeluri si carne">Mezeluri si carne</option>
+                                <option value="Oua">Oua</option>
+                                <option value="Panificatie">Panificatie</option>
+                                <option value="Produse congelate">Produse congelate</option>
+                                <option value="Snacks">Snacks</option>
+                            </select>
+                        </div>
+                        <div className="divFoodAdder">
+                            <label className="labelsFoodAdderSection">Claimable</label>
+                            <select id="boxClaim" name="type" size="1" required onChange={(evt) => setClaimable(evt.target.value)}>
+                                <option value="false">False</option>
+                                <option value="true">True</option>
+                            </select>
+                        </div>
+                        <button className='btnPrimary' onClick={addFoodtoDB}>Add food</button>
                     </div>
-                    <div className="divFoodAdder">
-                        <label className="labelsFoodAdderSection">Expiration Date</label>
-                        <input
-                        id="boxExpiration"
-                        type="date"
-                        onChange={(evt) => setExpiration(evt.target.value)}
-                        required
-                        />
-                    </div>
-                    <div className="divFoodAdder">
-                        <label className="labelsFoodAdderSection">Food Type</label>
-                        <select id="boxFType" name="type" size="1" required onChange={(evt) => setFoodType(evt.target.value)}>
-                            <option value="Bauturi alcoolice">Bauturi alcoolice</option>
-                            <option value="Bauturi non-alcoolice">Bauturi non-alcoolice</option>
-                            <option value="Cafea">Cafea</option>
-                            <option value="Cereale">Cereale</option>
-                            <option value="Conserve">Conserve</option>
-                            <option value="Dulciuri">Dulciuri</option>
-                            <option value="Fructe">Fructe</option>
-                            <option value="Ingrediente culinare">Ingrediente culinare</option>
-                            <option value="Lactate">Lactate</option>
-                            <option value="Legume">Legume</option>
-                            <option value="Mezeluri si carne">Mezeluri si carne</option>
-                            <option value="Oua">Oua</option>
-                            <option value="Panificatie">Panificatie</option>
-                            <option value="Produse congelate">Produse congelate</option>
-                            <option value="Snacks">Snacks</option>
-                        </select>
-                    </div>
-                    <div className="divFoodAdder">
-                        <label className="labelsFoodAdderSection">Claimable</label>
-                        <select id="boxClaim" name="type" size="1" required onChange={(evt) => setClaimable(evt.target.value)}>
-                            <option value="false">False</option>
-                            <option value="true">True</option>
-                        </select>
-                    </div>
-                    <button className='btnPrimary' onClick={addFoodtoDB}>Add food</button>
+                    <button id="btnNotification" type='submit' onClick={receiveNotification}>Notify</button>
                 </div>
                 <div className='ClaimReqList'>
                     <div className='titleNBtns'>
                         <p className='pageHeaderTitle'>Claim Requests from other users</p>
                     </div>
-                    <div className='FoodList'>
+                    <div className='ClaimList'>
                         {claimReq!=null && claimReq?.map(e => <ClaimRequestReceive key={e.id_claim} item={e} />)}
                         {(claimReq.length === 0 || claimReq[0]===null)  ?(<p>No claim request received</p>):(<div/>)}
                     </div>
@@ -321,13 +324,12 @@ const Account=(props)=>{
                     <div className='titleNBtns'>
                         <p className='pageHeaderTitle'>Claim Requests made by current user</p>
                     </div>
-                    <div className='FoodList'>
+                    <div className='ClaimList'>
                         {claimReqOwned.length > 0 && claimReqOwned?.map(e => <ClaimRequestSent key={e.id_claim} item={e} />)}
                         {(claimReqOwned.length === 0 || claimReqOwned[0]===null)  ?(<p>No claim request received</p>):(<div/>)}
                     </div>
                 </div>
             </div>
-            <button id="btnNotification" type='submit' onClick={receiveNotification}>Notify</button>
         </div>
     );
 }

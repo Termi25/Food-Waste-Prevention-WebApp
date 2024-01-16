@@ -571,15 +571,18 @@ app.get("/claimRequests/received/:id_user", async(req,res,next)=>{
     const user=await User.findByPk(req.params.id_user)
     if(user){
       const foods =await Food.findAll({ where: { userIdUser: user.id_user,Claimable:true}})
-      const claimsDetailed=[]
+      var claimsDetailed=[]
       if(foods){
         for(let i=0;i<foods.length;i++){
-          const query=await ClaimRequest.findAll({where:{foodIdFood:foods[i].id_food}})
-          if(typeof query !== 'undefined' && query.length > 0){
-            claimsDetailed.push(query.shift())
+          const query=await ClaimRequest.findAll({where:{foodIdFood:foods[i].id_food, status:'pending'}})
+          const shift=query.shift()
+          console.log(shift)
+          if(shift!==undefined){
+            claimsDetailed.push(shift)
           }
         }
         if(claimsDetailed.length>0){
+          console.log(claimsDetailed)
           res.status(201).json(claimsDetailed)
         }else{
           res.sendStatus(204)

@@ -32,7 +32,6 @@
 
 .FoodAdder{
     margin-top:0px;
-    margin-left:5px
 }
 
 .FriendList{
@@ -65,9 +64,9 @@
 
 .divFoodAdder{
     flex-direction: column;
-    align-items: left;
+    align-items: baseline;
     justify-content: left;
-    width:17vw;
+    width:10vw;
     height:6vh;
 }
 
@@ -85,6 +84,11 @@
 
 #toCenter:hover{
     color:#FFB000
+}
+
+.Adder_w_Notify{
+    display:flex;
+    height: fit-content;
 }
 
 .FoodList,.FoodAdder{
@@ -121,7 +125,7 @@
 
 #btnLogOut,#btnNotification{
     margin-left:5px;
-    flex-grow: 0.5;
+    flex-grow: 0.1;
 }
 
 #btnNotification{
@@ -145,4 +149,15 @@
 
 .labelsAccountSection{
     font-weight: bold;
+}
+
+.ClaimReqList{
+    width:16vw;
+}
+
+.ClaimList{
+    background-color: #E86A33;
+    padding:10px;
+    border-radius: 4px;
+    width:fit-content
 }
