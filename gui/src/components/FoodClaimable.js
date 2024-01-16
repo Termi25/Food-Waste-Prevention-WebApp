@@ -8,7 +8,7 @@ function FoodClaimable (props) {
     const { item } = props
     const authId=useSelector((state)=>state.authId)
     const isLoggedIn=useSelector((state)=>state.isLoggedIn)
-    const [alreadyClaimmed,setAlreadyClaimed]=useState(false)
+    const [alreadyClaimed,setAlreadyClaimed]=useState(false)
 
     function setCheck(){
         if(item.Claimable===false){
@@ -19,7 +19,7 @@ function FoodClaimable (props) {
     }
 
     async function checkClaimedByCurrUser(){
-        if(isLoggedIn!==false && alreadyClaimmed===false){
+        if(isLoggedIn!==false && alreadyClaimed===false){
             const response=await fetch(`${SERVER}/claimRequests/check/${authId}/${item.id_food}`, {
                 method: 'get',
                 headers: {
@@ -35,7 +35,7 @@ function FoodClaimable (props) {
     useEffect(()=>{
         try{
             checkClaimedByCurrUser()
-            if(alreadyClaimmed===true){
+            if(alreadyClaimed===true){
                 console.log(`${item.food_name} already claimmed`)
             }
         }catch(err){
@@ -44,7 +44,7 @@ function FoodClaimable (props) {
     },[authId])
 
     async function addClaim(){
-        if(isLoggedIn!==false && alreadyClaimmed===false){
+        if(isLoggedIn!==false && alreadyClaimed===false){
             const response=await fetch(`${SERVER}/claimRequest/${item.id_food}/${authId}`, {
                 method: 'post',
                 headers: {
@@ -54,18 +54,18 @@ function FoodClaimable (props) {
               });
             if(response.status===201){
                 console.log('Claim added')
+                setAlreadyClaimed(true)
             }  
-        }else{
-            if(isLoggedIn!==false && alreadyClaimmed===true){
-                addNotification({
-                    title: "Notification",
-                    subtitle: "Claim request for this item is already sent",
-                    theme: "white",
-                    closeButton: "X",
-                    backgroundTop: "yellow", 
-                    colorTop:"black"
-                  })
-            }
+        }
+        if(isLoggedIn!==false && alreadyClaimed===true){
+            addNotification({
+                title: "Notification",
+                subtitle: "Claim request for this item is already sent",
+                theme: "white",
+                closeButton: "X",
+                backgroundTop: "yellow", 
+                colorTop:"black"
+              })
         }
     }
 

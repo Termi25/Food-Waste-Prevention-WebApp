@@ -83,11 +83,11 @@ function ClaimRequestReceive (props) {
         <div className='status'>
             Status: {item.status}
         </div>
-        {item.status!=='accepted' ?(
-        <div>
-            <button onClick={btnAcceptClaimReq}>Accept</button>
-            <button onClick={btnRejectClaimReq}>Reject</button>
-        </div>
+        {item.status==='pending' ?(
+            <div>
+                <button onClick={btnAcceptClaimReq}>Accept</button>
+                <button onClick={btnRejectClaimReq}>Reject</button>
+            </div>
         ):(<div/>)}
         
     </div>
