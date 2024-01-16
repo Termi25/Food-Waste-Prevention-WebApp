@@ -42,16 +42,17 @@ function Food (props) {
         <div className='visibility'>
             <label className="labelsFoodSection">VISIBILITY :  </label>
             {item.Claimable===false ?(
-                        <select id="boxFType" name="type" size="1" required onChange={(evt) => updateFood(evt.target.value)}>
-                            <option value="false" selected>Not claimable</option>
+                        <select id="boxFType" name="type" size="1"required onChange={(evt) => updateFood(evt.target.value)}>
+                            <option value="false" selected="selected">Not claimable</option>
                             <option value="true">Claimable</option>
                         </select>)
                         :(
                         <select id="boxFType" name="type" size="1" required onChange={(evt) => updateFood(evt.target.value)}>
                             <option value="false">Not claimable</option>
-                            <option value="true" selected>Claimable</option>
+                            <option value="true" selected="selected">Claimable</option>
                         </select>)
             }
+
         </div>
     </div>
     )

@@ -30,8 +30,8 @@ const Account=(props)=>{
     const [foodType,setFoodType]=useState("")
     const [claimable,setClaimable]=useState(false)
 
-    const [claimReq,setClaimReq]=useState("")
-    const [claimReqOwned,setClaimReqOwned]=useState("")
+    const [claimReq,setClaimReq]=useState([])
+    const [claimReqOwned,setClaimReqOwned]=useState([])
 
     const navigate=useNavigate()
     const dispatch=useDispatch()
@@ -204,6 +204,15 @@ const Account=(props)=>{
                 }
             }
         }
+        if(food.length===0){
+            addNotification({
+                title: "Notify",
+                message: `There is no food currently added. Please add food to be notified by this feature`,
+                theme: "white",
+                closeButton: "X",
+                backgroundTop: "orange", 
+              })
+        }
     }
 
     useEffect(() => {
@@ -221,9 +230,12 @@ const Account=(props)=>{
     return (
         <div id="mainAccount"> 
             <div className="accountDetails">
-                <Link to="/giveawaycenter">
+                <div id="linkBar">
                     <p className='pageHeaderTitle' id='toCenter'>WasteNOT</p>
-                    </Link>
+                    <Link to="/giveawaycenter">
+                        <p className='pageHeaderTitle' id='toCenter'>Giveaway Center</p>
+                        </Link>
+                </div>
                 <UserData />
                 <div className='accountDetailsLower'>
                     <button id="btnLogOut" onClick={LogOut}>Log Out</button>
@@ -232,9 +244,8 @@ const Account=(props)=>{
                                 Friends List
                                 </p>
                         {users.length > 0 && users?.map(e => <User key={e.id_user} item={e} />)}   
-                        {users.length ===0 ?(<p>No friends added</p>):(<div/>)}
+                        {users.length === 0 ?(<p>No friends added</p>):(<div/>)}
                     </div>
-                    <button id="btnNotification" type='submit' onClick={receiveNotification}>Notifications</button>
                 </div>
             </div>
             <div className='FoodList'>
@@ -299,23 +310,24 @@ const Account=(props)=>{
                 </div>
                 <div className='ClaimReqList'>
                     <div className='titleNBtns'>
-                        <p className='pageHeaderTitle'>Claim Requests</p>
+                        <p className='pageHeaderTitle'>Claim Requests from other users</p>
                     </div>
                     <div className='FoodList'>
-                        {claimReq.length > 0 && claimReq?.map(e => <ClaimRequestReceive key={e.id_claim} item={e} />)}
-                        {claimReq.length === 0 ?(<p>No claim request received</p>):(<div/>)}
+                        {claimReq!=null && claimReq?.map(e => <ClaimRequestReceive key={e.id_claim} item={e} />)}
+                        {(claimReq.length === 0 || claimReq[0]===null)  ?(<p>No claim request received</p>):(<div/>)}
                     </div>
                 </div>
                 <div className='ClaimReqList'>
                     <div className='titleNBtns'>
-                        <p className='pageHeaderTitle'>Claim Requests for my food</p>
+                        <p className='pageHeaderTitle'>Claim Requests made by current user</p>
                     </div>
                     <div className='FoodList'>
                         {claimReqOwned.length > 0 && claimReqOwned?.map(e => <ClaimRequestSent key={e.id_claim} item={e} />)}
-                        {claimReqOwned.length === 0 ?(<p>No claim request received</p>):(<div/>)}
+                        {(claimReqOwned.length === 0 || claimReqOwned[0]===null)  ?(<p>No claim request received</p>):(<div/>)}
                     </div>
                 </div>
             </div>
+            <button id="btnNotification" type='submit' onClick={receiveNotification}>Notify</button>
         </div>
     );
 }

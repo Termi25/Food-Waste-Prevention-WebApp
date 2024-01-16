@@ -575,7 +575,9 @@ app.get("/claimRequests/received/:id_user", async(req,res,next)=>{
       if(foods){
         for(let i=0;i<foods.length;i++){
           const query=await ClaimRequest.findAll({where:{foodIdFood:foods[i].id_food}})
-          claimsDetailed.push(query.shift())
+          if(typeof query !== 'undefined' && query.length > 0){
+            claimsDetailed.push(query.shift())
+          }
         }
         if(claimsDetailed.length>0){
           res.status(201).json(claimsDetailed)

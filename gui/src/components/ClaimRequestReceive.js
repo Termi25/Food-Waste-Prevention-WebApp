@@ -78,7 +78,7 @@ function ClaimRequestReceive (props) {
             Expiration date: {food.ExpirationDate}
         </div>
         <div>
-            User requesting claim: {foodOwner.username}
+            {foodOwner.id_user!==authId ?(<div>User requesting claim: {foodOwner.username}</div>):(<div/>)}
         </div>
         <div className='status'>
             Status: {item.status}
