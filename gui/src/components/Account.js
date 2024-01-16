@@ -165,6 +165,47 @@ const Account=(props)=>{
         }
     }
 
+    function receiveNotification(){
+        for(let i=0;i<food.length;i++){
+            const date2=new Date().toISOString().slice(0, 10)
+
+            var currDate=new Date(date2)
+            var foodDate=new Date(food[i].ExpirationDate)
+        
+            if(currDate.getTime()===foodDate.getTime()){
+                // addNotification({
+                //     title: "Notify",
+                //     subtitle: "Product expiration date will soon be passed",
+                //     message: `${item.food_name} will expire today`,
+                //     theme: "white",
+                //     duration: 6000,
+                //     closeButton: "X",
+                //     backgroundTop: "red", 
+                //   })
+            }else{
+                if(currDate.getTime()>foodDate.getTime()){
+                    addNotification({
+                        title: "Alert",
+                        subtitle: "Product expiration date passed",
+                        message: `${food[i].food_name} has expired`,
+                        theme: "dark",
+                        closeButton: "X",
+                        backgroundTop: "red", 
+                      })
+                }else{
+                    var zile=foodDate.getDate()-currDate.getDate()
+                        addNotification({
+                            title: "Notify",
+                            message: `${food[i].food_name} will expire in ${zile} days`,
+                            theme: "white",
+                            closeButton: "X",
+                            backgroundTop: "orange", 
+                          })
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         try{
             getFood()
@@ -193,6 +234,7 @@ const Account=(props)=>{
                         {users.length > 0 && users?.map(e => <User key={e.id_user} item={e} />)}   
                         {users.length ===0 ?(<p>No friends added</p>):(<div/>)}
                     </div>
+                    <button id="btnNotification" type='submit' onClick={receiveNotification}>Notifications</button>
                 </div>
             </div>
             <div className='FoodList'>

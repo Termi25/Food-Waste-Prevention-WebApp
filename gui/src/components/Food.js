@@ -5,42 +5,42 @@ import { useState } from 'react';
 function Food (props) {
     const { item } = props
 
-    const date2=new Date().toISOString().slice(0, 10)
+    // const date2=new Date().toISOString().slice(0, 10)
 
-    var currDate=new Date(date2)
-    var foodDate=new Date(item.ExpirationDate)
+    // var currDate=new Date(date2)
+    // var foodDate=new Date(item.ExpirationDate)
 
-    if(currDate.getTime()===foodDate.getTime()){
-        // addNotification({
-        //     title: "Notify",
-        //     subtitle: "Product expiration date will soon be passed",
-        //     message: `${item.food_name} will expire today`,
-        //     theme: "white",
-        //     duration: 6000,
-        //     closeButton: "X",
-        //     backgroundTop: "red", 
-        //   })
-    }else{
-        if(currDate.getTime()>foodDate.getTime()){
-            addNotification({
-                title: "Alert",
-                subtitle: "Product expiration date passed",
-                message: `${item.food_name} has expired`,
-                theme: "dark",
-                closeButton: "X",
-                backgroundTop: "red", 
-              })
-        }else{
-            var zile=foodDate.getDate()-currDate.getDate()
-                addNotification({
-                    title: "Notify",
-                    message: `${item.food_name} will expire in ${zile} days`,
-                    theme: "white",
-                    closeButton: "X",
-                    backgroundTop: "orange", 
-                  })
-        }
-    }
+    // if(currDate.getTime()===foodDate.getTime()){
+    //     // addNotification({
+    //     //     title: "Notify",
+    //     //     subtitle: "Product expiration date will soon be passed",
+    //     //     message: `${item.food_name} will expire today`,
+    //     //     theme: "white",
+    //     //     duration: 6000,
+    //     //     closeButton: "X",
+    //     //     backgroundTop: "red", 
+    //     //   })
+    // }else{
+    //     if(currDate.getTime()>foodDate.getTime()){
+    //         addNotification({
+    //             title: "Alert",
+    //             subtitle: "Product expiration date passed",
+    //             message: `${item.food_name} has expired`,
+    //             theme: "dark",
+    //             closeButton: "X",
+    //             backgroundTop: "red", 
+    //           })
+    //     }else{
+    //         var zile=foodDate.getDate()-currDate.getDate()
+    //             addNotification({
+    //                 title: "Notify",
+    //                 message: `${item.food_name} will expire in ${zile} days`,
+    //                 theme: "white",
+    //                 closeButton: "X",
+    //                 backgroundTop: "orange", 
+    //               })
+    //     }
+    // }
 
     function setCheck(){
         if(item.Claimable===false){

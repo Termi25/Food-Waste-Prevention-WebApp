@@ -16,7 +16,7 @@ function UserReq (props) {
                 'Content-Type': 'application/json'  
             },      
         })    
-        if(response.status===201){
+        if(response.status===204){
             setBtnPressed(true)   
         }    
     }
