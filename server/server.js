@@ -463,8 +463,26 @@ app.get("/friendRelations/:id_user", async(req,res,next)=>{
   }
 });
 
+// SELECT friend relation with current user and a friend user -functional
+app.get("/friendRelations/:id_user1/:id_user2", async(req,res,next)=>{
+  try{
+      const friends=await FriendRelation.findAll({where:{userIdUser:req.params.id_user1, user_id2:req.params.id_user2}})
+      if(friends.length >0){
+        if(friends[0]!==undefined){
+          res.status(201).json(friends.shift())
+        }else{
+          res.sendStatus(204)
+        }
+      }else{
+        res.sendStatus(404)
+      }
+  }catch(err){
+    next(err)
+  }
+});
+
 // INSERT friend with current user -functional
-app.post("/friendRelation/:id_user1",async(req,res,next)=>{
+app.post("/friendRelations/:id_user1",async(req,res,next)=>{
   try{
     const user =await User.findByPk(req.params.id_user1)
     if(user){
@@ -481,7 +499,7 @@ app.post("/friendRelation/:id_user1",async(req,res,next)=>{
 });
 
 // INSERT friend by email with current user -functional
-app.post("/friendRelation/:id_user1/:email",async(req,res,next)=>{
+app.post("/friendRelations/:id_user1/:email",async(req,res,next)=>{
   try{
     const user =await User.findByPk(req.params.id_user1)
     const friendtoAdd=await User.findAll({where:{emailAdress:req.params.email}})
@@ -504,7 +522,7 @@ app.post("/friendRelation/:id_user1/:email",async(req,res,next)=>{
 });
 
 // UPDATE friendRelation -functional
-app.put('/friendRelation/:id_user1/:user_id2',async(req,res,next)=>{
+app.put('/friendRelations/:id_user1/:user_id2',async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user1)
     if(user)
@@ -525,7 +543,7 @@ app.put('/friendRelation/:id_user1/:user_id2',async(req,res,next)=>{
 });
 
 // DELETE friendRelation between 2 users -functional
-app.delete('/friendRelation/:id_user/:user_id2', async(req,res,next)=>{
+app.delete('/friendRelations/:id_user/:user_id2', async(req,res,next)=>{
   try{
     const user=await User.findByPk(req.params.id_user)
     if(user){

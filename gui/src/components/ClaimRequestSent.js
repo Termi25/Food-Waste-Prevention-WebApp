@@ -51,9 +51,11 @@ function ClaimRequestSent (props) {
         <div className='ClaimReqField'>
             Expiration date : {food.ExpirationDate}
         </div>
-        <div className='ClaimReqField'>
+        {foodOwner.id_user!==authId ? 
+        (<div className='ClaimReqField'>
             Owner of food : {foodOwner.username}
-        </div>
+        </div>)
+        :(<div/>)}
         <div className='ClaimReqField' id='status'>
             Status : {item.status}
         </div>    

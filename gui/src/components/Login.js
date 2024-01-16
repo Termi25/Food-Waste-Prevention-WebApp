@@ -1,6 +1,5 @@
 
 import { useNavigate } from 'react-router-dom'
-import {  useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import "./Login.css"
 import UserForm from './UserForm'
@@ -54,7 +53,7 @@ function Login (props) {
 
     return(
       <div className='mainLogin'>
-        <p>Food Waste Preventer</p>
+        <p>Login - WasteNot</p>
         <UserForm onAdd={verifyUser}/>
         <input type="button" id="btnRegister" value="Register" onClick={registerRedirect}/>
       </div>

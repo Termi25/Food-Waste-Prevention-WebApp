@@ -10,7 +10,7 @@ function UserReq (props) {
     
     async function addFriend(){
         const email=item.emailAdress;
-        const response=await fetch(`${SERVER}/friendRelation/${authId}/${email}`, {    
+        const response=await fetch(`${SERVER}/friendRelations/${authId}/${email}`, {    
             method: 'post',    
             headers: {    
                 'Content-Type': 'application/json'  

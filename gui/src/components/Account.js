@@ -7,6 +7,7 @@ import ClaimRequestReceive from './ClaimRequestReceive'
 import ClaimRequestSent from './ClaimRequestSent'
 import Food from './Food'
 import User from './User'
+import UserFriends from './UserFriends'
 import "./Account.css"
 
 const SERVER = 'http://localhost:8080'
@@ -249,7 +250,7 @@ const Account=(props)=>{
                         <p className='pageHeaderTitle' id='UsersListTitle'>
                                 Friends List
                                 </p>
-                        {users.length > 0 && users?.map(e => <User key={e.id_user} item={e} />)}   
+                        {users.length > 0 && users?.map(e => <UserFriends key={e.id_user} item={e} />)}   
                         {users.length === 0 ?(<p>No friends added</p>):(<div/>)}
                     </div>
                 </div>
@@ -337,6 +338,7 @@ const Account=(props)=>{
                 </div>
                 <a href="https://www.flaticon.com/free-icons/facebook" title="facebook icons" target="_blank">Resource 1</a>
                 <a href="https://www.flaticon.com/free-icons/add" title="add icons" target="_blank">Resource 2</a>
+                <a href="https://www.flaticon.com/free-icons/save" title="save icons">Resource 3</a>
             </div>
         </div>
     );
