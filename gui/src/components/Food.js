@@ -7,7 +7,6 @@ const SERVER = 'http://localhost:8080'
 
 function Food (props) {
     const { item } = props
-    const [claimState,setClaimState]=useState(false)
     const authId=useSelector((state)=>state.authId)
     
     async function updateFood(value){

@@ -1,12 +1,19 @@
 import { useState } from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import { Link } from 'react-router-dom'
 import './User.css'
-import {useSelector} from 'react-redux'
 
 const SERVER = 'http://localhost:8080'
 function UserReq (props) {
     const { item } = props
     const authId=useSelector((state)=>state.authId)
     const [btnPressed,setBtnPressed]=useState(false)
+
+    const dispatch = useDispatch()
+
+    async function DispatchUser(){
+        dispatch({type:'userView',externalUserId:item.id_user})
+    }
     
     async function addFriend(){
         const email=item.emailAdress;
@@ -24,7 +31,9 @@ function UserReq (props) {
     return (
         <div className='userFriendReq'>
             <div className='username'>
-                {item.username}
+                <Link to="/users/account" onClick={DispatchUser}>
+                    {item.username}
+                </Link>
             </div>
             <div className='email'>
                 {item.typeOfEater}

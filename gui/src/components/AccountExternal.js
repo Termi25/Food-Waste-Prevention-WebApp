@@ -2,15 +2,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react'
 import addNotification from 'react-push-notification'
-import Food from './Food'
 import User from './User'
+import FoodExternalUser from './FoodExternalUser'
 import "./Account.css"
 
 const SERVER = 'http://localhost:8080'
 
 function AccountExternal(props){
     const authId=useSelector((state)=>state.authId)
-    const isLoggedIn=useSelector((state)=>state.isLoggedIn)
     const externalUserId=useSelector((state)=>state.externalUserId)
     const [users,setUsers]=useState([])
 
@@ -85,7 +84,7 @@ function AccountExternal(props){
 
     const getUsers = async () => {
         try{
-            const response = await fetch(`${SERVER}/friendRelations/${authId}`)
+            const response = await fetch(`${SERVER}/friendRelations/${externalUserId}`)
             const data = await response.json()
             setUsers(data)
         }catch(err){
@@ -95,7 +94,7 @@ function AccountExternal(props){
 
     const getFood = async () => {
         try{
-            const response = await fetch(`${SERVER}/foods/${authId}`)
+            const response = await fetch(`${SERVER}/foods/${externalUserId}`)
             const data = await response.json()
             setFood(data)
         }catch(err){
@@ -110,24 +109,30 @@ function AccountExternal(props){
         }catch(err){
             // alert('Dont forget to add the food in your fridge!')
         }
-      },[authId])
+      },[authId,externalUserId])
 
 
     return (
-        <div id="mainAccount"> 
+        <div id="mainAccount2"> 
             <div className="accountDetails">
                 <div id="linkBar">
                     <p className='pageHeaderTitle' id='toCenter'>WasteNOT</p>
-                    <Link to="/giveawaycenter">
-                        <p className='pageHeaderTitle' id='toGAC'>Giveaway Center</p>
-                    </Link>
-                    <Link to="/account">
-                        <p className='pageHeaderTitle' id='toAccount'>Account</p>
-                    </Link>
+                    <div className='pageSeparator'>
+                        <Link to="/giveawaycenter">
+                            <p className='pageHeaderTitle' id='toGAC'>Giveaway Center</p>
+                        </Link>
+                        <Link to="/account">
+                            <p className='pageHeaderTitle' id='toAccount'>Account</p>
+                        </Link>
+                        <Link to="/" onClick={LogOut}>
+                            <p className='pageHeaderTitle' id='toLogin'>
+                                Log out
+                            </p>
+                        </Link>
+                    </div>
                 </div>
                 <UserData />
                 <div className='accountDetailsLower'>
-                    <button id="btnLogOut" onClick={LogOut}>Log Out</button>
                     <div className='FriendList'>
                         <p className='pageHeaderTitle' id='UsersListTitle'>
                                 Friends List
@@ -142,7 +147,7 @@ function AccountExternal(props){
                     <p className='pageHeaderTitle'>FOOD LIST</p>
                 </div>
                 <div className='FoodList'>
-                    {food.length > 0 && food?.map(e => <Food key={e.id_food} item={e} />)}
+                    {food.length > 0 && food?.map(e => <FoodExternalUser key={e.id_food} item={e} />)}
                     {food.length ===0 ?(<p>No food added</p>):(<div/>)}
                 </div>
             </div>
