@@ -32,7 +32,7 @@ function UserReq (props) {
         <div className='userFriendReq'>
             <div className='username'>
                 <Link to="/users/account" onClick={DispatchUser}>
-                    {item.username}
+                    User: {item.username}
                 </Link>
             </div>
             <div className='email'>

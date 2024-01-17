@@ -58,10 +58,10 @@ function UserFriends (props) {
   },[authId])
 
   return (
-      <div className='user'>
+      <div className='user2'>
         <div className='username'>
           <Link to="/users/account" onClick={DispatchUser}>
-            {item.username}
+            User: {item.username}
           </Link>
         </div>
         <div className='email'>

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-.user,.userFriendReq{
+.user,.userFriendReq,.user2{
   font-family: Comfortaa;
   font-size: medium;
-  height: 5em;
+  height: 3em;
   width: 20em;
   background-color: #41644A;
   margin: 10px;
@@ -11,12 +11,17 @@
   align-items: baseline;
   justify-content: baseline;
   border-radius: 4px;
-  padding:10px;
-  padding-top:15px;
+  padding:5px;
 }
 
 .userFriendReq{
-  width:10em
+  height: 5em;
+  width:10em;
+  padding:10px;
+}
+.user2{
+  height:5em;
+  width:15em
 }
 
 #txtEticheta{
