@@ -1,2 +1,2 @@
 # TW-Project
-Food Waste App
+Food Waste Prevention App
