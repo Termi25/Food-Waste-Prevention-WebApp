@@ -22,21 +22,21 @@ function UserReq (props) {
     }
 
     return (
-        <div className='user'>
-        <div className='username'>
-            {item.username}
-        </div>
-        <div className='email'>
-            {item.typeOfEater}
-        </div>
-            {btnPressed ===false ?(
-                <button id='btnAddFriend' onClick={addFriend}>
-                    <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
-                    <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
-                </button>
-            ):(
-            <div/
-            >)}
+        <div className='userFriendReq'>
+            <div className='username'>
+                {item.username}
+            </div>
+            <div className='email'>
+                {item.typeOfEater}
+            </div>
+                {btnPressed ===false ?(
+                    <button id='btnAddFriend' onClick={addFriend}>
+                        <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
+                        <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
+                    </button>
+                ):(
+                <div/
+                >)}
             
         </div>
     )

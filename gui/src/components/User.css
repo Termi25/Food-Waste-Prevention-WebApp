@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-.user {
+.user,.userFriendReq{
   font-family: Comfortaa;
   font-size: medium;
   height: 5em;
@@ -13,6 +13,10 @@
   border-radius: 4px;
   padding:10px;
   padding-top:15px;
+}
+
+.userFriendReq{
+  width:10em
 }
 
 #txtEticheta{
