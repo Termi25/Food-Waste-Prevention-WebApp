@@ -13,6 +13,21 @@
     background-position-y: 6vw;
 }
 
+#mainAccount2{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:flex-start;
+    height:100vh;
+    width:100vw;
+    margin-left:5px;
+    background-image:url('../images/ting-tian-E6DsqnZbZ4o-unsplash.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 12.5vw;
+    background-position-y:2vh;
+}
+
 #linkBar{
     display:flex;
     flex-direction: row;
@@ -43,6 +58,10 @@
     margin-top:15px;
     background-color: #E86A33;
     border-radius: 2%;
+}
+
+.pageSeparator{
+    display:flex
 }
 
 .FoodAdder{

@@ -94,7 +94,7 @@ function GiveAwayCenter(){
                 </div>
                 <div className='UserList'>
                     <p className='pageHeaderTitle' id='UsersListTitle'>
-                            Users that can be added
+                            Not friends
                             </p>
                     {users.length > 0 && users?.map(e => <UserReq key={e.id_food} item={e} />)}
                     {users.length ===0 ?(<p>No users to add as friends</p>):(<div/>)}

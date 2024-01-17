@@ -6,7 +6,6 @@ import {FacebookShareButton}from 'react-share'
 import ClaimRequestReceive from './ClaimRequestReceive'
 import ClaimRequestSent from './ClaimRequestSent'
 import Food from './Food'
-import User from './User'
 import UserFriends from './UserFriends'
 import "./Account.css"
 

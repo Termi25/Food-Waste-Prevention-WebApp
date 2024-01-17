@@ -1,12 +1,19 @@
 import { useState } from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import { Link } from 'react-router-dom'
 import './User.css'
-import {useSelector} from 'react-redux'
 
 const SERVER = 'http://localhost:8080'
 function UserReq (props) {
     const { item } = props
     const authId=useSelector((state)=>state.authId)
     const [btnPressed,setBtnPressed]=useState(false)
+
+    const dispatch = useDispatch()
+
+    async function DispatchUser(){
+        dispatch({type:'userView',externalUserId:item.id_user})
+    }
     
     async function addFriend(){
         const email=item.emailAdress;
@@ -22,21 +29,23 @@ function UserReq (props) {
     }
 
     return (
-        <div className='user'>
-        <div className='username'>
-            {item.username}
-        </div>
-        <div className='email'>
-            {item.typeOfEater}
-        </div>
-            {btnPressed ===false ?(
-                <button id='btnAddFriend' onClick={addFriend}>
-                    <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
-                    <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
-                </button>
-            ):(
-            <div/
-            >)}
+        <div className='userFriendReq'>
+            <div className='username'>
+                <Link to="/users/account" onClick={DispatchUser}>
+                    User: {item.username}
+                </Link>
+            </div>
+            <div className='email'>
+                {item.typeOfEater}
+            </div>
+                {btnPressed ===false ?(
+                    <button id='btnAddFriend' onClick={addFriend}>
+                        <img id='imgButtonAdd1' src={require('../images/additionOrange.png')}/>
+                        <img id='imgButtonAdd2' src={require('../images/additionYellow.png')}/>
+                    </button>
+                ):(
+                <div/
+                >)}
             
         </div>
     )
