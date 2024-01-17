@@ -25,10 +25,13 @@
 }
 
 #txtEticheta{
+  font-family: Comfortaa;
+  font-size: medium;
   background-color: #41644A;
   margin-top:2px;
   border-radius: 4px;
   border-color: #F2E3DB;
+  padding-left:5px
 }
 
 .username,.email,#txtEticheta{
