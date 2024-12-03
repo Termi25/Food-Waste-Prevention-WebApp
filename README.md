@@ -1,6 +1,3 @@
-# TW-Project
-Food Waste Prevention App
-
 # Goal
 To develop a web app that allows users to share food they no longer consume
 
